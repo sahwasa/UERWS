@@ -1,0 +1,190 @@
+@import "./variables";
+
+@mixin mobile_only {
+  @media (max-width: #{$breakpoint-mobile}) {
+    @content;
+  }
+}
+@mixin mobile_tablet {
+  @media (min-width: #{$breakpoint-mobile_tablet}) and (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+@mixin tablet_only {
+  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop{
+  @media (max-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin desktop_only{
+  @media (min-width: #{$breakpoint-desktop}) {
+    @content;
+  }
+}
+
+@mixin firefox_only{
+  @-moz-document url-prefix(){
+    @content;
+  }
+}
+
+@mixin blind{
+  font-size:0;line-height:0;position:absolute!important;left:0;top:0;text-indent:-9999px;visibility:hidden;overflow:hidden;
+}
+
+@mixin ipt_common(){  
+  position:relative;min-height:32px;border:1px solid #cccccc;color:#555;background-color:rgba(255,255,255,.9);vertical-align:middle;padding:0 5px;box-sizing:border-box;
+}
+
+@mixin f_blind{
+  font-size:0!important;line-height:0;color:transparent!important;overflow:hidden;
+}
+
+@mixin alignL($numbers){
+  @each $num in $numbers{
+   &:nth-of-type(#{$num}){text-align:left;}
+  } 
+}
+
+@mixin bar($w:$w,$h:$h,$gap:$gap,$col:$col){
+  @include shape($w,$h);background-color:$col;margin:0 15px 0 #{15 - $gap};
+}
+
+@mixin divide($w:1px,$h:10px,$gap:5px,$col:$border_gray,$after:false){
+  position:relative;display:inline-flex;align-items:center;gap:$gap;
+  @if($after){
+    &::after{@include bar($w:$w,$h:$h,$gap:$gap,$col:$col);@content}
+  }@else{
+    &::before{@include bar($w:$w,$h:$h,$gap:$gap,$col:$col);@content}
+  }
+}
+
+@keyframes blink{
+  0%{
+      background-color:#f00;
+  }
+  50%{
+      background-color:#ff6509;
+  }
+  100%{
+      background-color:#f00;
+  }
+}
+@keyframes bounce{
+ 	0% {
+    transform: translateY(0); /* Start at the normal position */
+  }
+  50% {
+    transform: translateY(-5px); /* Move up slightly less */
+  }
+  80% {
+    transform: translateY(0); /* Return to the normal position */
+  }
+  100% {
+    transform: translateY(0); /* End at the normal position */
+  }
+}
+@mixin flex_between{display:flex;justify-content:space-between;align-items:center;}
+
+@mixin full{display:block;width:100%!important;min-width:auto;}
+
+@mixin btn($bg:#fff,$color:inherit,$border:$border_gray,$y:8px,$x:15px,$w:false,$addTxt:false,$addTxtafter:false){flex-shrink:0;cursor:pointer;font-size:13px;vertical-align:middle;
+  background-color:$bg;color:$color;padding:$y $x;border-radius:3px;border:1px solid $border;
+  @if($bg == #fff){
+    &:hover{border-color:darken($border, 10);color:darken($border, 20);}
+  }@else{
+    &:hover{background-color:darken($bg, 5);}
+  }
+  @if($w){width:$w}
+  @if($addTxt){
+    &{display:inline-flex;align-items:center;justify-content:center;gap:7px;}
+    &::before{@include fontello($addTxt);vertical-align:middle;font-size:14px;}
+  }
+  @if($addTxtafter){
+    &{display:inline-flex;align-items:center;justify-content:center;gap:7px;}
+    &::after{@include fontello($addTxtafter);vertical-align:middle;font-size:14px;}
+  }
+}
+@mixin btnType($type:default){
+  @if($type == L){height:40px;padding:0 30px;font-weight:600;font-size:16px;}
+  @else if($type == M){height:32px;padding:0 10px;font-size:14px;}
+  @else if($type == S){height:25px;padding:0 6px;font-size:12px;}
+}
+@mixin tag($color){flex-shrink:0;font-size:13px;color:#fff;border-radius:5px;border:1px solid darken($color,15);background-color:$color;padding:1px 3px;font-weight:normal;white-space:nowrap;}
+
+@mixin shape($w_size,$h_size){
+  display:inline-block;content:"";@include f_blind;overflow:hidden;flex-shrink:0;
+  width:$w_size;height:$h_size;
+}
+@mixin fontello($ic:default){
+  display:inline-block;font-family:"fontello";font-weight:normal;content:$ic;line-height:1;
+}
+@mixin ico_only($font:none){vertical-align:middle;line-height:1;
+  @if($font == none){@include f_blind;
+    &::before{@include shape(26px,26px);background:url(../images/ico.png) 0 0 no-repeat;@content;}  
+  }@else{font-size:0;
+    &::before{@include fontello($font);font-size:13px;color:#848890;@content;}
+  }
+}
+@mixin scrollbarW($w:0){
+  &::-webkit-scrollbar{width:$w;}
+}
+@mixin ellipsis(){
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;
+}
+@mixin count($name:list_num){
+  counter-increment:$name;content:counter($name);font-weight:800;text-align:right;
+}
+@mixin label_item($hideIpt: false, $onBg: #00b0a4, $color: #333, $onColor: #fff){display:inline-flex;gap:12px;color:$color;border:1px solid #c5c9d0;border-radius:3px;padding:5px 7px;outline:1px solid transparent;cursor:pointer;
+  input{width:18px;aspect-ratio:1;}
+  &:focus-within{outline:2px solid #000;}
+  &:has(:checked){border-color:$onBg;}
+  @if($hideIpt){
+    &{justify-content:center;gap:0;}
+    input{position:absolute;opacity:0;width:0;height:0;
+        :not(&:disabled),
+        :not(&:read-only){&:hover+label{cursor:pointer;}}
+    }
+    &:has(:checked){background-color:$onBg;color:$onColor;}
+  }  
+}
+@mixin text_stroke($color:inherit){
+  // @supports (-webkit-text-stroke: $color){
+  //   -webkit-text-stroke:1px $color;
+  // } 
+  text-shadow: -1px 0 $color, 0 1px $color, 1px 0 $color, 0 -1px $color;
+}
+@mixin dot($col:#9da7b8,$size:2px){
+  &::before{@include shape($size,$size);flex-shrink:0;border-radius:50%;background-color:$col;vertical-align:middle;@content;}
+}
+@mixin down_arrow($size:15px,$col:#fff,$center:false,$border:false){
+  position:absolute;@include shape($size,$size);transform:scaleX(1.2) rotate(45deg);background-color:$col;@content;
+  @if($border){border:1px solid $border;border-width:0 0 1px 1px;}
+  @if($center){left:50%;margin-left:calc((#{$size} / 2) * -1);}
+}
+@mixin alignL($numbers,$reverse : false){
+  @each $num in $numbers{
+    &{text-align:center;}
+    @if($reverse){
+      &:nth-last-of-type(#{$num}){text-align:left;@content;}      
+    }@else{
+      &:nth-of-type(#{$num}){text-align:left;@content;}
+    }
+  } 
+}
+@mixin marginL($numbers, $gap:30px, $reverse : false){
+  @each $num in $numbers{
+    &{text-align:center;}
+    @if($reverse){
+      &:nth-last-of-type(#{$num}){margin-left:$gap;@content;}      
+    }@else{
+      &:nth-of-type(#{$num}){margin-left:$gap;@content;}
+    }
+  } 
+}

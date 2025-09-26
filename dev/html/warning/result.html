@@ -1,0 +1,407 @@
+@@include('../../inc/top.html')
+<body>
+<div id="wrap">
+  @@include('../../inc/header.html')
+  <div class="con_wrap">
+     @@include('../../inc/warning/lnb.html')
+     <main class="contents">
+        <div class="panel_wrap result">
+          <section class="panel panel_main">
+            <header class="tit">
+              <h1>발령현황</h1>
+            </header>
+            <div class="panel_content">
+              <div class="search_area">                
+                <ul class="search">
+                  <li>
+                    <select title="전체" id="stt"><option value="">전체</option><option value="A">승인</option><option value="B">반려</option></select>
+                  <select title="대분류" id="code1" onchange="setCode2()"><option value="">전체</option><option value="T1">자연재난</option><option value="T2">사회재난</option><option value="T3">기타재난</option></select>
+                  <select title="중분류" id="code2"><option value="">전체</option></select>
+                  </li>
+                  <li>
+                    <select title="재난상황" id="situation"><option value="">전체</option><option value="Actual">실제</option><option value="Exercise">훈련</option><option value="Test">시험</option></select>
+                    <span class="period period_multi">
+                    <input type="text" id="date_timepicker_start" class="input_calendar" value="YYYY-MM-DD" placeholder="기간 시작일 선택" title="기간 시작일 선택">
+                    <input type="text" id="date_timepicker_end" class="input_calendar" value="YYYY-MM-DD" placeholder="기간 종료일 선택" title="기간 종료일 선택">
+                  </span>
+                  </li>
+                  <li>
+                    <select title="전체" id="auto_yn">
+                    <option value="">전체</option>
+                    <option value="0">자동</option>
+                    <option value="9">수동</option>
+                  </select>
+                    <input type="text" title="location" placeholder="발령지역" id="areadesc" onkeydown="fn_onKeyDown();">
+                    <button type="button" class="btn_skyblue" onclick="search();">검색</button>
+                  </li>
+                </ul>
+              </div>
+              <div class="tbl_area">
+                <div class="tbl_top">
+                  <p>
+                    전체 <span id="count_all">4</span>건 &sol;
+                    승인 <span id="count_A">4</span>건 &sol;
+                    반려 <span id="count_B">0</span>건 &sol;
+                    <b class="font_blue">승인요청 <span id="count_R">0</span>건</b>
+                  </p>
+                  <div class="tool">
+                    <button type="button" class="btn_greenline" onclick="excelDown()">엑셀다운</button>
+                  </div>
+                </div>
+                <div class="tbl_wrap">
+                  <table class="tbl_default tbl_hover tbl_s">
+                    <colgroup>
+                      <col style="width:50px">
+                      <col style="width:140px">
+                      <col style="width:220px">
+                      <col style="width:140px">
+                      <col style="width:120px">
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th scope="col">유형</th>
+                        <th scope="col">재난정보</th>
+                        <th scope="col">수신처</th>
+                        <th scope="col">처리시각</th>
+                        <th scope="col">최종상태</th>
+                      </tr>
+                    </thead>
+                    <tbody id="left_list">
+                      <tr onclick="selectRow(this, 'KR.T10107-2024000001_HRE_1', '3100000000')" style="cursor:pointer;" value="KR.T10107-2024000001_HRE_1">
+                        <td>
+                          <div class="type_wrap">
+                            <i class="Test">시험</i><i class="Reserve">예약</i>
+                          </div>
+                        </td>
+                        <td>호우 긴급정보</td><td>울산광역시</td><td>2024-02-06 10:32:02</td><td>승인</td></tr>
+                      <tr onclick="selectRow(this, 'KR.T10107-2024000001_HRE_1', '3100000000')" style="cursor:pointer;" value="KR.T10107-2024000001_HRE_1">
+                        <td>
+                          <div class="type_wrap">
+                            <i class="Actual">실제</i><i class="manual">수동</i>
+                          </div>
+                        </td>
+                        <td>호우 긴급정보</td><td>울산광역시</td><td>2024-02-06 10:32:02</td><td>승인</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>            
+          </section>
+          <section class="panel panel_sub">
+            <div class="panel_content">
+              <header class="tit">
+                <h3 id="detail_title"><img id="detail_icon" src="../../images/symbol/HRE.png" width="38" height="32">호우 긴급정보 시험방송</h3>
+                <div class="tool">
+                  <button type="button" class="btn_skyblue" onclick="document.querySelector('#pop_report').show()">발령이력 보고서</button>
+                </div>
+              </header>
+              <div class="flex_vertical">
+                <div class="set_desc">
+                  <dl class="issue_dtl">
+                    <dt>수신유형</dt>
+                    <dd id="media_select">재해문자전광판(지자체), 마을방송시스템</dd>
+                    <dt>발생시각</dt>
+                    <dd id="detail_creat_dt">2024-02-13 15:35</dd>
+                    <dt>종료시각</dt>
+                    <dd>2024-02-13 15:35</dd>
+                    <dt id="detail_mag_li">규       모</dt>
+                    <dd id="detail_mag">-</dd>
+                    <dt>발생위치</dt>
+                    <dd id="detail_location">울산(동구)</dd>
+                    <dt>발령단말</dt>
+                    <dd id="detail_device">울산(동구)</dd>                  
+                  </dl>
+                  <div class="opt_area">
+                    <button type="button" class="btn_opt">+ 추가옵션 상세보기</button>
+                    <div class="layer">
+                      <header class="p_header">
+                        <h1 class="blind">추가옵션 상세보기</h1>
+                        <button type="button" class="btn_cross" onclick="document.activeElement.blur();">닫기</button>         
+                      </header>
+                      <div>
+                        <header class="tit">
+                          <h2>재해문자전광판 추가옵션</h2>
+                        </header>                    
+                        <dl class="dl_list">
+                          <dt>표시효과</dt>
+                          <dd>
+                            <ul>
+                              <li>
+                                <span class="effect">
+                                  아래에서부터 위로 서서히 올라가며 점점 빨라지며 바운스됨ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ
+                                </span>
+                              </li>
+                              <li>
+                                <strong>속도<span>1(빠름)</span></strong>                      
+                                <strong>표시 유지시간<span>3초</span></strong>
+                              </li>
+                            </ul>
+                          </dd>
+                          <dt>완료효과</dt>
+                          <dd>
+                            <ul>
+                              <li>
+                                <span class="effect">
+                                  아래에서부터 위로 서서히 올라가며 점점 빨라지며 바운스됨
+                                </span>
+                              </li>
+                              <li>
+                                <strong>속도<span>2</span></strong>
+                              </li>
+                            </ul>
+                          </dd>
+                          <dt>싸이렌 출력</dt>
+                          <dd>사용안함</dd>
+                        </dl>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab tab_s">
+                  <ul class="tab_list">
+                    <li><a href="#tab01" class="on">발령내용</a></li>
+                    <li><a href="#tab02">수신처 발령이력</a></li>
+                  </ul>
+                </div>
+                <div class="tab_conts">
+                  <div class="tab_cont" id="tab01">
+                    <!-- <figure id="detail_img" class="dtl_img"><img src="http://122.199.200.232:9200//noti/2024/KR.T10101-2024900002_HWA_1/IMG/KR.T10101-2024900002_HWA_1_MAP.png?refesh='0.15003963318223512'" onclick="enLarge(this)"></figure> -->
+                    <div class="slide_container_wrap generated_slide_lst">                                   
+                      <ul class="slide_container">
+                        <li class="slide_item">
+                          <img src="http://122.199.200.232:9200//noti/2024/KR.T10101-2024900002_HWA_1/IMG/KR.T10101-2024900002_HWA_1_MAP.png?refesh='0.15003963318223512" alt="slide" />
+                        </li>
+                        <li class="slide_item">
+                          <img src="https://picsum.photos/400/400?random=1" alt="slide" />
+                        </li>
+                        <li class="slide_item">
+                          <img src="https://picsum.photos/400/400?random=2" alt="slide" />
+                        </li>
+                      </ul>
+                      <div class="slideRemote">
+                        <button type="button" class="slide_prev" onclick="prevSlide()">&#10094;</button>
+                        <button type="button" class="slide_next" onclick="nextSlide()">&#10095;</button>
+                      </div>
+                      <div class="dots_container"></div>
+                    </div>
+                    <div id="tabs" class="tab_wrap">
+                      <ul>
+                        <li><a href="#tabs-1">한국어</a></li>
+                        <li><a href="#tabs-2">영어</a></li>
+                      </ul>
+                      <div id="tabs-1">
+                        @@include('../../inc/warning/msg_lst.html')
+                      </div>
+                    
+                      <div id="tabs-2">
+                        @@include('../../inc/warning/msg_lst.html')
+                      </div>						  
+                    </div>						
+                  </div>
+                  <div class="tab_cont" id="tab02">
+                    <div class="search_area">
+                      <div class="search_wrap flex_wrap">
+                        <ul class="search f_sb" style="height: auto;">
+                          <li class="flex">
+                            <select title="성공여부" id="">
+                              <option value="">전체</option>
+                              <option value="">성공</option>
+                              <option value="">실패</option>
+                            </select>
+                            <select class="full" title="매체선택" id="">
+                              <option value="">자율주행표시창치(C-ITS)</option>
+                            </select>
+                          </li>
+                          <li class="flex">
+                            <input type="text" title="단말기명" placeholder="단말기명" id="areadesc" onkeydown="fn_onKeyDown();" class="full">
+                          <button type="button" class="btn_skyblue" onclick="search();">검색</button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="tbl_wrap">
+                      <table class="tbl_default tbl_s tbl_clicked tbl_hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">성공 여부</th>
+                            <th scope="col">단말기유형</th>
+                            <th scope="col">단말기명</th>
+                            <th scope="col">설치주소</th>
+                            <th scope="col">발송시각</th>
+                            <th scope="col">메모</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><i class="ico_status" title="성공">성공</i></td>
+                            <td>마을방송</td>
+                            <td>00지구 00회관</td>
+                            <td>단말기 설치 주소 (100자리 이내)</td>
+                            <td>2024-02-06 10:32:02</td>
+                            <td>-</td>                    
+                          </tr>
+                          <tr>
+                            <td><i class="ico_status abnormal" title="실패">실패</i></td>
+                            <td>마을방송</td>
+                            <td>00지구 00회관</td>
+                            <td>단말기 설치 주소 (100자리 이내)</td>
+                            <td>2024-02-06 10:32:02</td>
+                            <td>실패사유</td>                    
+                          </tr>
+                          <tr>
+                            <td><i class="ico_status not_use" title="사용안함">사용안함</i></td>
+                            <td>마을방송</td>
+                            <td>00지구 00회관</td>
+                            <td>단말기 설치 주소 (100자리 이내)</td>
+                            <td>2024-02-06 10:32:02</td>
+                            <td>실패사유</td>                    
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="btn_subclose">상세패널 닫기</button>
+          </section>
+          <span class="btn_switch_single btn_slide">
+            <input type="checkbox" id="btn_panel">
+            <label for="btn_panel">패널 여닫기 버튼</label>
+          </span>
+        </div>
+        <div class="map_content">
+          <div class="request_wrap" id="map">
+            <div class="btn_wrap btn_map">
+              <button class="btn on" id="mapmode_1" onclick="mapMode(1)">기본지도</button>
+              <button class="btn" id="mapmode_2" onclick="mapMode(2)">2D지도</button>
+              <button class="btn" id="mapmode_3" onclick="mapMode(3)">위성지도</button>
+            </div>
+          </div>
+          <div class="symbols">         
+            <div class="symbol" style="--left:1100px;--top:50px">
+              <button type="button" class="BIS fail selected">00지구 00회관(단말기명)_실패</button>
+              <div class="layer" style="display: block;">
+                <button type="button" class="axi axi-close" title="닫기">닫기</button>
+                <strong>00지구 00회관(단말기명)</strong>
+                <ul class="lst">
+                  <li><em>유형</em>버스정보시스템</li>
+                  <li><em>시스템</em>00운수 버스정보시스템</li>
+                  <li><em>주소</em>단말기 설치 주소 (100자리 이내)</li>                
+                  <li><em>발송시각</em>2023-05-04 12:11:34</li>
+                  <li><em>성공여부</em><span class="font_red">실패</span></li>
+                  <li><em>메모</em>실패 사유</li>
+                </ul>
+              </div>
+            </div>
+            <div class="symbol" style="--left:1100px;--top:350px">
+              <button type="button" class="CDB selected">00지구 00회관(단말기명)_성공</button>
+              <div class="layer" style="display: block;">
+                <button type="button" class="axi axi-close" title="닫기">닫기</button>
+                <strong>00지구 00회관(단말기명)_성공</strong>
+                <ul class="lst">
+                  <li><em>유형</em>재해문자전광판 (행정안전부)</li>
+                  <li><em>시스템</em>00군 재해문자전광판 (행정안전부)</li>
+                  <li><em>주소</em>단말기 설치 주소 (100자리 이내)</li>                
+                  <li><em>발송시각</em>2023-05-04 12:11:34</li>
+                  <li><em>성공여부</em><span class="font_green">성공</span></li>
+                  <li><em>메모</em>-</li>
+                </ul>
+              </div>
+            </div>                      
+            @@include('../../inc/warning/symbol_device.html')
+            @@include('../../inc/warning/symbol_legend.html')
+            <div class="layer receiver_result" style="display:block;left:1100px;top:550px">
+              <button type="button" class="btn_cross" title="닫기">닫기</button>
+              <strong>수신자 목록</strong>
+              <div class="tbl_wrap" style="--h:234px">
+                <table class="tbl_default tbl_s">
+                  <thead>
+                    <tr>
+                      <th scope="col">순번</th>
+                      <th scope="col">지역명</th>
+                      <th scope="col">수신자명</th>
+                      <th scope="col">소속</th>
+                      <th scope="col">연락처</th>
+                      <th scope="col">발송시각</th>
+                      <th scope="col">성공여부</th>
+                      <th scope="col">메모</th>
+                    </tr>
+                  </thead>
+                  <tbody id="">
+                  <tr>
+                    <td>1</td>
+                    <td>청주시</td>
+                    <td>홍길동</td>
+                    <td>청주시청</td>
+                    <td>010-1234-5678</td>
+                    <td>2025-11-20 10:13:02</td>
+                    <td><i class="i_success">성공</i></td>
+                    <td>-</td>
+                  </tr>                  
+                  <tr>
+                    <td>1</td>
+                    <td>청주시</td>
+                    <td>홍길동</td>
+                    <td>청주시청</td>
+                    <td>010-1234-5678</td>
+                    <td>2025-11-20 10:13:02</td>
+                    <td><i class="i_fail">실패</i></td>
+                    <td>실패사유</td>
+                  </tr>                  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+     </main>
+  </div>
+</div>
+@@include('../../inc/warning/pop_history_report.html')
+<dialog id="add_opt" class="opt_area" style="--width:200px">
+  <header class="p_header">
+    <h1>재해문자전광판 추가옵션</h1>
+    <button type="button" class="btn_cross">닫기</button>         
+  </header>
+  <div class="p_body">
+    <dl class="dl_list">
+      <dt>표시효과</dt>
+      <dd>
+        <ul>
+          <li>
+            <span class="effect">
+              아래에서부터 위로 서서히 올라가며 점점 빨라지며 바운스됨ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ
+            </span>
+          </li>
+          <li>
+            <strong>속도<span>1(빠름)</span></strong>                      
+            <strong>표시 유지시간<span>3초</span></strong>
+          </li>
+        </ul>
+      </dd>
+      <dt>완료효과</dt>
+      <dd>
+        <ul>
+          <li>
+            <span class="effect">
+              아래에서부터 위로 서서히 올라가며 점점 빨라지며 바운스됨
+            </span>
+          </li>
+          <li>
+            <strong>속도<span>2</span></strong>
+          </li>
+        </ul>
+      </dd>
+      <dt>싸이렌 출력</dt>
+      <dd>
+        <div class="switch_toggle">
+          <input type="checkbox" id="useYN1" checked disabled><label class="useYN" for="useYN1">사용여부</label>
+        </div>
+      </dd>
+    </dl>
+  </div>
+</dialog>
+@@include('../../inc/script.html')
+</body>
+</html>

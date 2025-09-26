@@ -1,0 +1,32 @@
+<dialog id="pop_map" class="pop_map" style="--width:1100px">
+  <div class="p_header">
+    <h1>지도보기</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </div>
+  <div class="p_body map_content">
+    <div class="symbols">
+      <div class="symbol" style="--left:200px;--top:50px">
+        <button type="button" class="BIS">00지구 00회관(단말기명)</button>
+        <div class="layer" style="display: block;">
+          <button type="button" class="btn_cross" title="닫기">닫기</button>
+          <strong>00지구 00회관(단말기명)</strong>
+          <ul class="lst">
+            <li><em>유형</em>버스정보시스템</li>
+            <li><em>시스템</em>00운수 버스정보시스템</li>
+            <li><em>고유번호</em>단말기 고유식별번호 (30자리 이내)</li>
+            <li><em>위도</em>37.12345</li>
+            <li><em>경도</em>123.12345</li>
+            <li><em>주소</em>단말기 설치 주소 (100자리 이내)</li>                
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ol-viewport"> 
+    </div>
+    <div class="btn_wrap btn_map">
+      <button class="btn on" id="mapmode_1" onclick="mapMode(1)">기본지도</button>
+      <button class="btn" id="mapmode_2" onclick="mapMode(2)">2D지도</button>
+      <button class="btn" id="mapmode_3" onclick="mapMode(3)">위성지도</button>
+    </div>        
+    @@include('symbol_legend.html')
+</dialog>

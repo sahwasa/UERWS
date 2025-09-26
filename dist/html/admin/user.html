@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>지자체 재난 예경보 통합플랫폼</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../images/favicon.png">
+  <link rel="stylesheet" href="../../plugins/axicon/axicon.min.css">
+  <link rel="stylesheet" href="../../plugins/jquery-ui/themes/base/jquery-ui.min.css">
+  <link rel="stylesheet" href="../../plugins/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.css">
+  <link rel="stylesheet" href="../../plugins/jqueryui-timepicker-addon/dist/jquery.datetimepicker.css">
+  <link rel="stylesheet" href="../../font/fontello/css/fontello.css">
+  <link rel="stylesheet" href="../../css/cmmn.css">
+  <link rel="stylesheet" href="../../css/warning.css">
+  <link rel="stylesheet" href="../../css/tui-pagination.css">
+  <script src="../../plugins/jquery/dist/jquery.min.js"></script>
+  <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="../../plugins/jquery-ui/ui/i18n/datepicker-ko.js"></script>
+  <script src="../../plugins/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.js"></script>
+  <script src="../../plugins/jqueryui-timepicker-addon/dist/jquery.datetimepicker.full.min.js"></script>
+  <!-- <script src="../../plugins/jqueryui-timepicker-addon/dist/i18n/jquery-ui-timepicker-ko.js"></script> -->
+  <script src="../../plugins/echarts/dist/echarts.min.js"></script>
+  <!-- <script src="../../js/tui-pagination.js"></script> -->
+  <script src="../../js/common.js"></script>
+  <script src="../../js/ui_common.js"></script>
+
+</head>
+
+
+<body>
+<div id="wrap">
+  <header id="header">
+  <h1 class="main_logo">
+    <a href="/main.do">
+      <!-- <img src="../../images/logo.png" alt="정부로고">지자체 재난 예경보 통합플랫폼 -->
+      <!-- <img src="../../images/3100000000.png" alt="울산시로고">울산시 재난 예경보 통합플랫폼 -->
+      <!-- <img src="../../images/4311000000.png" alt="청주시로고">청주시 재난 예경보 통합플랫폼 -->
+      <!-- <img src="../../images/4278000000.png" alt="철원군로고">철원군 재난 예경보 통합플랫폼 -->
+      <img src="../../images/logo/5280000000.png" alt="철원군로고">철원군 재난 예경보 통합플랫폼</a>
+  </h1>  
+  <div class="util_wrap">
+    <ul class="util_lst">
+      <li>
+        <button type="button" class="btn user" onclick="document.querySelector('#pop_myInfo').show()">내정보 보기 및 수정</button>
+        <span><b id="top_user_nm">김관리</b>님</span>
+      </li>
+      <li><a href="../../html/admin/user.html" class="btn set" title="시스템관리">시스템관리</a></li>
+      <li class="alert_wrap" title="재난발령요청">
+        <a href="javascript:(document.querySelector('#p_alert').show())" class="btn alert">재난발령요청</a>
+        <span class="on" id="alert_counter">0</span>
+      </li>      
+      <li class="alert_wrap" onclick="open_accdent_popup()" title="돌발상황">
+        <a href="#" class="btn unexpected">돌발상황</a>
+        <span class="on" id='accident_counter'>2</span>
+      </li>
+      <li title="연계상태"><a href="javascript:(document.querySelector('#p_stats').show())" class="system">연계상태</a></li>
+      <li title="로그아웃"><a href="login.html" class="btn log">로그아웃</a></li>
+    </ul>
+      <!-- <div class="system_wrap" style="cursor:pointer;">
+        <span class="system">시스템</span>
+      </div> -->
+  </div>
+</header>
+  <div class="con_wrap">
+    
+    <section class="lnb_panel lnb_admin">
+  <div class="panel_wrap">
+    <header class="tit">
+      <h1>시스템관리</h1>
+    </header>    
+    <nav class="lnb">
+      <ul id="left_menu">
+        <li class="on"><a href="../../html/admin/user.html">사용자관리</a></li>       
+        <li><a href="../../html/admin/cmmnCode.html">공통코드관리</a></li>       
+        <li><a href="../../html/admin/disasterCode.html">재난코드관리</a></li>
+        <li><a href="../../html/admin/dest.html">수신처관리</a></li>       
+      </ul>
+    </nav>      
+  </div>  
+</section>
+    <main class="contents">
+      <header class="tit">
+        <h1>사용자관리</h1>
+      </header>
+      <div class="content user_admin">        
+        <div class="search_area">
+          <ul class="search">
+            <li>
+              <select title="권한" id="search_auth"><option value="all">전체</option><option value="1">작성자</option><option value="2">승인자</option><option value="3">시스템운영자</option></select>
+              <input type="text" title="사용자명 검색어" placeholder="사용자명" id="search_username" onkeydown="fn_onKeyDown(1);">
+              <button type="button" class="btn_skyblue" onclick="getUserList()">검색</button>
+            </li>
+          </ul>
+        </div>
+        <div class="tbl_area">
+          <div class="tbl_top">
+            <div class="tool">
+              <button type="button" class="btn_skyblue" onclick="document.querySelector('.pop_userInfo').show();">추가</button>
+              <button type="button" class="btn_grayline" onclick="deleteUser()">삭제</button>
+            </div>
+          </div>
+          <div class="tbl_wrap">
+            <table class="tbl_default tbl_hover">
+              <caption>사용자관리</caption>              
+              <thead>
+                <tr>
+                  <th scope="col">선택</th>
+                  <th scope="col">권한</th>
+                  <th scope="col">사용자ID</th>
+                  <th scope="col">사용자명</th>
+                  <th scope="col">소속기관</th>
+                  <th scope="col">부서</th>
+                  <th scope="col">직급</th>
+                  <th scope="col">등록일</th>
+                  <th scope="col">수정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" name="checkbox_tab1" value="admin"></td>
+                  <td>시스템운영자</td>
+                  <td>admin</td>
+                  <td>김관리</td>
+                  <td>00시</td>
+                  <td>재난상황실</td>
+                  <td>주무관</td>
+                  <td>2022-02-15 18:08:25</td>
+                  <td>
+                    <button class="btn_edit" onclick="showUserInfo('admin')">수정</button>
+                    <button class="btn_del" onclick="">삭제</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="checkbox_tab1" value="user"></td>
+                  <td>작성자</td>
+                  <td>user</td>
+                  <td>사용자</td>
+                  <td>OO시</td>
+                  <td>OOOO과</td>
+                  <td>주임</td>
+                  <td>2022-02-16 16:44:32</td>
+                  <td>
+                    <button class="btn_edit" onclick="showUserInfo('user')">수정</button>
+                    <button class="btn_del" onclick="">삭제</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="user_pagination" class="tui-pagination"><span class="tui-page-btn tui-is-disabled tui-first"><span class="tui-ico-first">first</span></span><span class="tui-page-btn tui-is-disabled tui-prev"><span class="tui-ico-prev">prev</span></span><strong class="tui-page-btn tui-is-selected tui-first-child tui-last-child">1</strong><span class="tui-page-btn tui-is-disabled tui-next"><span class="tui-ico-next">next</span></span><span class="tui-page-btn tui-is-disabled tui-last"><span class="tui-ico-last">last</span></span></div>
+        </div>
+      </div>
+    </main>
+  </div>  
+</div>
+<dialog id="pop_userInfo" class="pop_userInfo" style="--width:400px">
+  <header class="p_header">
+    <h1>사용자 추가 및 수정</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <dl class="dl_list my_info">
+      <dt>ID</dt>
+      <dd id="common_user_id"><strong>admin</strong></dd>
+      <dt><label for="" class="required">사용자명</label></dt>
+      <dd><input type="text"></dd>
+      <dt><label for="" class="required">비밀번호</label></dt>
+      <dd>
+        <input type="password" value="abcdefg"/><button type="button" class="btn_skyblue">변경</button>
+      </dd>
+      <dt><label for="common_org_nm" class="required">소속기관</label></dt>
+      <dd><input type="text" id="common_org_nm" maxlength="20"></dd>
+      <dt><label for="common_department_nm" class="required">부서</label></dt>
+      <dd><input type="text" id="common_department_nm" maxlength="20"></dd>
+      <dt><label for="common_rank_nm">직급</label></dt>
+      <dd><input type="text" id="common_rank_nm" maxlength="20"></dd>
+      <dt><label for="common_phone">연락처</label></dt>
+      <dd><input type="text" id="common_phone" maxlength="20"></dd>
+      <dt><label for="common_email">이메일</label></dt>
+      <dd><input type="text" id="common_email" maxlength="50"></dd>     
+      <dt><label for="common_auth">권한</label></dt>
+      <dd>
+        <select id="common_auth" disabled>
+          <option value="1">작성자</option><option value="2">승인자</option><option value="3">시스템운영자</option>
+        </select>
+      </dd>
+    </dl>
+    <div class="p_foot">
+      <button type="button" class="btn_deep">수정</button>
+      <button type="button" class="btn_gray">취소</button>
+    </div>
+  </div>
+</dialog>
+</div>
+
+<!-- popup 비밀번호변경 -->
+<dialog id="pop_changePassword" class="pop_changePassword" style="--width:400px;">
+  <header class="p_header">
+    <h1>비밀번호 변경</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <p class="box_gray">
+      8~16자의 영문 대소문자, 숫자, 특수문자만 가능합니다.
+    </p>
+    <dl class="dl_list change_pw">
+      <dt><label for="" class="required">현재 비밀번호</label></dt>
+      <dd>
+        <input type="password" value="abcdefg"/>
+      </dd>
+      <dt><label for="common_pwd">새 비밀번호</label></dt>
+      <dd>
+        <input type="password" id="common_pwd" maxlength="16">
+      </dd>
+      <dt><label for="common_pwd2">확인</label></dt>
+      <dd>
+        <input type="password" id="common_pwd2" maxlength="16">
+      </dd>
+    </dl>
+    <div class="p_foot">
+      <button type="button" class="btn_blue">확인</button>
+      <button type="button" class="btn_gray">취소</button>
+    </div>
+  </div>
+</dialog>
+<!-- popup 비밀번호변경__e -->
+
+<!-- popup 내 정보-->
+<dialog id="pop_myInfo" class="pop_myInfo" style="--width:400px">
+  <header class="p_header">
+    <h1>내 정보</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <dl class="dl_list my_info">
+      <dt>ID</dt>
+      <dd id="common_user_id"><strong>admin</strong></dd>
+      <dt><label for="" class="required">비밀번호</label></dt>
+      <dd>
+        <input type="password" value="abcdefg"/><button type="button" class="btn_skyblue">변경</button>
+      </dd>
+      <dt><label for="common_org_nm" class="required">소속기관</label></dt>
+      <dd><input type="text" id="common_org_nm" maxlength="20"></dd>
+      <dt><label for="common_department_nm" class="required">부서</label></dt>
+      <dd><input type="text" id="common_department_nm" maxlength="20"></dd>
+      <dt><label for="common_rank_nm">직급</label></dt>
+      <dd><input type="text" id="common_rank_nm" maxlength="20"></dd>
+      <dt><label for="common_phone">연락처</label></dt>
+      <dd><input type="text" id="common_phone" maxlength="20"></dd>
+      <dt><label for="common_email">이메일</label></dt>
+      <dd><input type="text" id="common_email" maxlength="50"></dd>     
+      <dt><label for="common_auth">권한</label></dt>
+      <dd>
+        <select id="common_auth" disabled>
+          <option value="1">작성자</option><option value="2">승인자</option><option value="3">시스템운영자</option>
+        </select>
+      </dd>
+    </dl>
+    <div class="p_foot">
+      <button type="button" class="btn_deep">수정</button>
+      <button type="button" class="btn_gray">취소</button>
+    </div>
+  </div>
+</dialog>
+</div>
+<!-- popup 내 정보__e -->
+
+<!-- popup 알림 리스트 -->
+<dialog id="p_alert" class="p_alert" style="--width:970px">
+  <header class="p_header">
+    <h1>알림 리스트</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <div class="tbl_wrap">
+      <table class="tbl_default tbl_hover">
+        <caption>알림 리스트</caption>
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">재난상황</th>
+            <th scope="col">재난정보</th>
+            <th scope="col">발생지역</th>
+            <th scope="col">요청자</th>
+            <th scope="col">승인요청시각</th>
+          </tr>
+        </thead>
+        <tbody id="notice_list"><tr onclick="showDetail('KR.T10101-2024900167_HWA_1')" style="cursor:pointer;"><td>1</td><td><ul class="type_wrap"><li class="Actual"></li></ul></td><td>강풍 주의보</td><td>울산(중구 우정동)</td><td>관리자(재난상황실)</td><td>2024-09-26 15:05:16</td></tr><tr onclick="showDetail('KR.T10101-2024900166_HWA_1')" style="cursor:pointer;"><td>2</td><td><ul class="type_wrap"><li class="Actual"></li></ul></td><td>강풍 주의보</td><td>울산(북구)</td><td>관리자(재난상황실)</td><td>2024-09-26 14:40:37</td></tr></tbody>
+      </table>
+      <div id="pagination" class="paginate tui-pagination"></div>
+    </div>   
+  </div>
+</dialog>
+<!-- popup 알림 리스트__e -->
+
+<!-- popup 시스템 연계상태 -->
+<dialog id="p_stats" class="p_stats" style="--width:1000px;">
+  <header class="p_header">
+    <h1>시스템 연계상태</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <div class="tbl_wrap">
+      <table class="tbl_default">
+        <caption>시스템 연계상태</caption>        
+        <thead>
+          <tr>
+            <th scope="col">수신처명</th>
+            <th scope="col">ID</th>
+            <th scope="col">연계상태</th>
+            <th scope="col">IP</th>
+            <th scope="col">담당자</th>
+            <th scope="col">연락처</th>
+            <th scope="col">접속시각</th>
+            <th scope="col">접속해제시각</th>
+          </tr>
+        </thead>
+        <tbody id="common_connected"><tr><td>KBS 울산방송</td><td>kbs_uhd</td><td>정상</td><td>203.231.92.54</td><td>KBS 울산방송</td><td>010-0000-0000</td><td>2024-09-25 07:46:39</td><td>-</td></tr><tr><td>울산게이트웨이</td><td>us_gateway</td><td>정상</td><td>221.138.17.195</td><td>울산 예경보</td><td>010-0000-0000</td><td>2024-09-20 07:35:17</td><td>-</td></tr><tr class="on"><td>UHD 수신테스트</td><td>idsp</td><td>점검필요</td><td>122.199.200.232</td><td>테스트</td><td>010-0000-9050</td><td>2024-09-09 13:10:24</td><td>2024-09-09 16:44:42</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</dialog>
+<!-- popup 시스템 연계상태__e -->
+
+<script type="text/javascript">
+  init();
+  initSlideshow();
+</script>
+</body>
+</html>

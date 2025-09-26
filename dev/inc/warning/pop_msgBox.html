@@ -1,0 +1,112 @@
+<dialog id="pop_msgBox" class="pop_msgBox" style="--width:1100px">
+  <div class="p_header">
+    <h1>메시지함</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </div>
+  <div class="p_body">
+    <div class="layout_flex">
+      <div class="tbl_area">                
+        <div class="tbl_top">         
+          <ul class="search">
+            <li><select name="" id="" title="그룹"><option value="">그룹</option></select></li>
+            <li>              
+              <input type="text" title="검색어" placeholder="검색어" id="">
+              <button type="button" class="btn_skyblue" onclick="search();">검색</button>
+            </li>
+          </ul>
+        </div>
+        <div class="tbl_wrap">
+          <table class="tbl_default tbl_hover tbl_msg">
+            <caption>메시지함</caption>
+            <thead>
+              <tr>
+                <th scope="col">번호</th>
+                <th scope="col">그룹</th>
+                <th scope="col">제목</th>
+              </tr>
+            </thead>             
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>일반</td>
+                <td><pre>장비 시험 방송 1장비 시험 방송 1장비 시험 방송 1장비 시험방송</pre></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>테스트</td>
+                <td><pre>장비 시험 방송 1</pre></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="linked_right">
+        <div id="tabs" class="tab_wrap">
+            <ul>
+              <li><a href="#tabs-1">한국어</a></li>
+              <li><a href="#tabs-2">영어</a></li>
+            </ul>
+            <div id="tabs-1">
+              <!-- 단말기발송 -->
+              <dl class="msg_lst">
+                <dt>
+                  <label for="text_40_kr">재해문자전광판</label>
+                  <span class="size"><span id="nowByte40_kr">0</span> / 40 bytes</span>
+                </dt>
+                <dd>
+                  <textarea id="text_40_kr" onkeyup="fn_checkByte(this, 80, 'nowByte80_kr')" maxlength="80" rows="1"></textarea>                   
+                </dd>
+                <dt>
+                  <label for="text_80_kr">재해문자전광판</label>
+                  <span class="size"><span id="nowByte80_kr">0</span> / 80 bytes</span>
+                </dt>
+                <dd>
+                  <textarea id="text_80_kr" onkeyup="fn_checkByte(this, 80, 'nowByte80_kr')" maxlength="80" rows="2"></textarea>                   
+                </dd>
+                <dt>
+                  <label for="text_180_kr">버스정보시스템/포털</label>
+                  <span class="size"><span id="nowByte180_kr">0</span> / 180 bytes</span>
+                </dt>
+                <dd><textarea id="text_180_kr" onkeyup="fn_checkByte(this, 180, 'nowByte180_kr')" rows="3"></textarea></dd>
+                <dt>
+                  <label for="text_voice_kr">마을방송/자동음성통보/자동우량경보</label>
+                </dt>
+                <dd>
+                  <textarea id="text_voice_kr" rows="3"></textarea>
+                </dd>              
+                <dt>음성파일</dt>
+                <dd>
+                  <audio controls="">
+                    <source src="" type="audio/mp3">
+                  </audio>
+                </dd>                 
+              </dl>
+            </div>              
+            <div id="tabs-2">
+              <!-- 문자발송 -->
+              <dl class="msg_lst">
+                <dt>
+                  <label for="text_40_kr">MMS</label>
+                  <span class="size"><span id="nowByte40_kr">0</span> / 40 bytes</span>
+                </dt>
+                <dd>
+                  <textarea id="text_40_kr" onkeyup="fn_checkByte(this, 80, 'nowByte80_kr')" maxlength="80" rows="4"></textarea>                   
+                </dd>
+                <dt>
+                  <label for="text_80_kr">LMS</label>
+                  <span class="size"><span id="nowByte80_kr">0</span> / 80 bytes</span>
+                </dt>
+                <dd>
+                  <textarea id="text_80_kr" onkeyup="fn_checkByte(this, 80, 'nowByte80_kr')" maxlength="80" rows="8"></textarea>                   
+                </dd>
+              </dl>
+            </div>          
+        </div>
+      </div>
+    </div>
+    <div class="p_foot">
+      <button type="button" class="btn_blue" onclick="">선택</button>
+      <button type="button" class="btn_grayline" onclick="">취소</button>
+    </div>
+  </div>
+</dialog>

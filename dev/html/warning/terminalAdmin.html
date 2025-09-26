@@ -1,0 +1,294 @@
+@@include('../../inc/top.html')
+<body>
+<div id="wrap">
+  @@include('../../inc/header.html')
+  <div class="con_wrap">
+     @@include('../../inc/warning/lnb.html')
+     <main class="contents terminal">
+        <div class="panel_wrap">          
+          <section class="panel panel_main">
+            <header class="tit">
+              <h1>단말기 관리</h1>
+            </header>
+            <div class="panel_content">      
+              <div class="lst_status all_lst_ctrl">
+                <label for="all" class="all"><input type="checkbox" id="all">전체선택</label>
+                <div class="tool">
+                  <button type="button" class="btn_skyblue" onclick="document.querySelector('.pop_sendingServer').show();">추가</button>
+                </div>
+              </div>
+              <ul id="" class="check_lst lst_ctrl">
+                <li>
+                  <strong>
+                    <i class="ico_status not_use" title="사용안함">사용안함</i>
+                    <label for="dong1"><input type="checkbox">gateway</label>
+                    <button type="button" class="btn_dtl" title="상세보기" onclick="document.querySelector('.pop_sendingServer').show();">상세보기</button>
+                  </strong>
+                </li>
+                <li>
+                  <strong>
+                    <i class="ico_status abnormal" title="비정상">비정상</i>
+                    <label for="dong1"><input type="checkbox">gateway-client</label>
+                    <button type="button" class="btn_dtl" title="상세보기" onclick="document.querySelector('.pop_sendingServer').show();">상세보기</button>
+                  </strong>
+                </li>
+                <li>
+                  <strong>
+                    <i class="ico_status" title="정상">정상</i>
+                    <label for="dong1"><input type="checkbox">마을방송시스템</label>
+                    <button type="button" class="btn_dtl" title="상세보기" onclick="document.querySelector('.pop_sendingServer').show();">상세보기</button>
+                  </strong>
+                </li>
+                <li>
+                  <strong>
+                    <i class="ico_status" title="정상">정상</i>
+                    <label for="dong1"><input type="checkbox">청주시 서버</label>
+                    <button type="button" class="btn_dtl" title="상세보기" onclick="document.querySelector('.pop_sendingServer').show();">상세보기</button>
+                  </strong>
+                </li>
+                <li>
+                  <strong>
+                    <i class="ico_status" title="정상">정상</i>
+                    <label for="dong1"><input type="checkbox">gateway-client2</label>
+                    <button type="button" class="btn_dtl" title="상세보기" onclick="document.querySelector('.pop_sendingServer').show();">상세보기</button>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </section>
+          <section class="panel panel_sub">            
+            <div class="panel_content">
+              <div class="search_area">                
+                <ul class="search">
+                  <li>
+                    <select title="시도" id="">
+                      <option value="">시도</option>
+                    </select>
+                    <select title="시군구" id="">
+                      <option value="">시군구</option>
+                    </select>
+                    <select title="읍면동" id="">
+                      <option value="">읍면동</option>
+                    </select>                  
+                  </li>                 
+                  <li>                    
+                    <input type="text" title="location" placeholder="장비명, 지역명" id="" onkeydown="">
+                    <button type="button" class="btn_skyblue" onclick="search();">검색</button>
+                  </li>
+                </ul>
+              </div>
+              <div class="tbl_area">
+                <div class="tbl_top">
+                  <div class="tool">
+                    <button type="button" class="btn_skyblue" onclick="document.querySelector('#pop_terminalAdmin').show();">추가</button>
+                    <button type="button" class="btn_greenline" onclick="excelDown()">엑셀다운</button>
+                  </div>
+                </div>
+                <div class="tbl_wrap">
+                  <table class="tbl_default tbl_hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">상태</th>
+                        <th scope="col">단말기 유형</th>
+                        <th scope="col">예경보서버</th>
+                        <th scope="col">단말기명</th>
+                        <th scope="col">단말기번호</th>
+                        <th scope="col">설치지역</th>
+                        <th scope="col">관리</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><i class="ico_status" title="정상">정상</i></td>
+                        <td>마을방송</td>
+                        <td>예경보서버1</td>
+                        <td>OO마을회관</td>
+                        <td>010-1234-5678</td>
+                        <td>경북 포항</td>
+                        <td><button type="button" class="btn_edit" title="수정">수정</button></td>
+                      </tr>
+                      <tr>
+                        <td><i class="ico_status abnormal" title="비정상">비정상</i></td>
+                        <td>마을방송</td>
+                        <td>예경보서버1</td>
+                        <td>OO마을회관</td>
+                        <td>010-1234-5678</td>
+                        <td>경북 포항</td>
+                        <td><button type="button" class="btn_edit" title="수정">수정</button></td>
+                      </tr>
+                      <tr>
+                        <td><i class="ico_status not_use" title="사용안함">사용안함</i></td>
+                        <td>마을방송</td>
+                        <td>예경보서버1</td>
+                        <td>OO마을회관</td>
+                        <td>010-1234-5678</td>
+                        <td>경북 포항</td>
+                        <td><button type="button" class="btn_edit" title="수정">수정</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>            
+          </section>
+          <span class="btn_switch_single btn_slide">
+            <input type="checkbox" id="btn_panel">
+            <label for="btn_panel">패널 여닫기 버튼</label>
+          </span>
+        </div>
+        <div class="map_content">
+          <div class="request_wrap" id="map">
+            <div class="btn_wrap btn_map">
+              <button class="btn on" id="mapmode_1" onclick="mapMode(1)">기본지도</button>
+              <button class="btn" id="mapmode_2" onclick="mapMode(2)">2D지도</button>
+              <button class="btn" id="mapmode_3" onclick="mapMode(3)">위성지도</button>
+            </div>
+          </div>
+          <div class="symbols">
+            <div class="symbol" style="--left:1100px;--top:350px">
+              <button type="button" class="CDB selected">00지구 00회관(단말기명)</button>
+              <div class="layer" style="display: block;">
+                <button type="button" class="axi axi-close" title="닫기">닫기</button>
+                <strong>00지구 00회관(단말기명)</strong>
+                <ul class="lst">
+                  <li><em>유형</em>마을방송시스템</li>
+                  <li><em>예경보시스템</em>..???예경보서버?</li>
+                  <li><em>고유번호</em>01234567890</li>
+                  <li><em>모델명</em>단말기 모델명</li>
+                  <li><em>위경도</em>12.345 &sol; 123.456</li>
+                  <li><em>설치주소</em>단말기 설치 주소 (100자리 이내)</li>                
+                  <li><em>설치일자</em>2024-05-04</li>
+                  <li><em>상태</em>
+                    <span class="font_green">정상
+                      (갱신:2025-04-08 10:20:10)
+                    </span>
+                  </li>
+                  <li><em>상태</em>
+                    <div class="font_gray">사용안함
+                      (갱신:2025-04-08 10:20:10)
+                    </div>
+                  </li>
+                  <li><em>상태</em>
+                    <div class="font_red">비정상
+                      (갱신:2025-04-08 10:20:10)
+                    </div>
+                  </li>
+                  <li><em>메모</em>비정상 사유</li>
+                </ul>
+              </div>
+            </div>    
+            @@include('../../inc/warning/symbol_device.html')        
+            @@include('../../inc/warning/symbol_legend.html')
+          </div>
+        </div>
+     </main>
+  </div>
+</div>
+<dialog id="pop_sendingServer" class="pop_sendingServer" style="--width:600px">
+  <div class="p_header">
+    <h1>예경보서버 추가 및 수정</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </div>
+  <div class="p_body">
+    <dl class="dl_list">
+      <dt><label for="">시스템명</label></dt>
+      <dd><input type="text"></dd>
+      <dt><label for="">서버IP</label></dt>
+      <dd><input type="text" value="123.123.1.1234" /></dd>
+      <dt><label for="">단말기 유형</label></dt>
+      <dd><select name="" id=""><option value="">단말기 유형(공통코드)</option></select></dd>      
+      <dt><label for="">통보대상지역</label></dt>
+      <dd>
+        <select name="" id=""><option value="">시도</option></select>
+        <select name="" id=""><option value="">시군구</option></select>      
+        <select name="" id=""><option value="">읍면동</option></select>
+        <select name="" id=""><option value="">리</option></select>
+        <button type="button" class="btn_skyblue">추가</button>
+      </dd>
+      <dd>
+        <ul class="selected_lst">
+          <li>울산<button type="button" class="btn_delete_s" onclick="removeSelected('3100000000')">선택해제</button></li>                               
+        </ul>
+      </dd>
+      <dt>접속상태</dt>
+      <dd><p>정상 (최근접속일시 : 2024-05-04 12:34:20)</p></dd>
+      <dt>비고</dt>
+      <dd><input type="text"></dd>
+      <dt><label for="">사용여부</label></dt>
+      <dd class="full">
+        <div class="switch_toggle">
+          <input type="checkbox" id="useYN1"><label class="useYN" for="useYN1">사용여부</label>
+        </div> 
+      </dd>
+    </dl>
+    <div class="p_foot">
+      <div class="renewal_time">(갱신시각 : 2024-07-01 10:10:10)</div>
+      <button type="button" class="btn_blue" onclick="">저장</button>
+      <!-- <button type="button" class="btn_blue" onclick="">수정</button> -->
+      <button type="button" class="btn_deep" onclick="">삭제</button>
+      <button type="button" class="btn_gray" onclick="">취소</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="pop_terminalAdmin" class="pop_terminalAdmin" style="--width:650px">
+  <div class="p_header">
+    <h1>단말기 추가 및 수정</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </div>
+  <div class="p_body">    
+    <dl class="dl_list column2">
+      <dt><label for="p_t_frcst_server_id" class="required">예경보 송출서버</label></dt>
+      <dd><select id="p_t_frcst_server_id" onchange="setPTDeviceCd()"><option value="4">청주시 마을방송시스템</option><option value="2552">test</option><option value="202">철원군 우보재난시스템</option><option value="10">부산 자동음성통보시스템</option></select></dd>
+      <dt><label for="p_t_device_cd" class="required">단말기 유형</label></dt>
+      <dd><select id="p_t_device_cd"><option value="">선택</option></select></dd>
+      <dt><label for="p_t_tmnduno" class="required">고유번호</label></dt>
+      <dd><input type="text" id="p_t_tmnduno"></dd>
+      <dt><label for="p_t_tmndunm" class="required">단말기명</label></dt>
+      <dd><input type="text" id="p_t_tmndunm"></dd>
+      <dt><label class="required">단말기 설치지역</label></dt>
+      <dd class="full">
+          <select id="p_t_legaldong_cd_1" onchange="getSigunguList('p_t_legaldong_cd')"><option value="2600000000">부산시</option></select>
+          <select id="p_t_legaldong_cd_2" onchange="getEmdList('p_t_legaldong_cd')" style=""><option value="">시군구</option><option value="2611000000">중구</option><option value="2614000000">서구</option><option value="2617000000">동구</option><option value="2620000000">영도구</option><option value="2623000000">부산진구</option><option value="2626000000">동래구</option><option value="2629000000">남구</option><option value="2632000000">북구</option><option value="2635000000">해운대구</option><option value="2638000000">사하구</option><option value="2641000000">금정구</option><option value="2644000000">강서구</option><option value="2647000000">연제구</option><option value="2650000000">수영구</option><option value="2653000000">사상구</option><option value="2671000000">기장군</option></select>
+          <select id="p_t_legaldong_cd_3" onchange="getLiList('p_t_legaldong_cd')" style="display: none;"><option value="">읍면동</option></select>
+          <select id="p_t_legaldong_cd_4" style="display: none;"><option value="">리</option></select>
+      </dd>
+      <dt><label>단말기 설치주소</label></dt>
+      <dd class="full"><input type="text" placeholder="주소" id="p_t_adres"></dd>
+      <dt><label for="p_t_lat" class="required">위도</label></dt>
+      <dd><input type="text" title="위도" id="p_t_lat"></dd>
+      <dt><label for="p_t_lon" class="required">경도</label></dt>
+      <dd><input type="text" title="경도" id="p_t_lon"></dd>
+      <dt><label for="p_t_trmnl_modl_nm">모델명</label></dt>
+      <dd><input id="p_t_trmnl_modl_nm"></dd>
+      <dt><label for="p_t_outpt">단말기표출형식</label></dt>
+      <dd><input type="text" id="p_t_outpt"></dd>
+      <dt><label for="p_t_min_perm_dist">허용 범위</label></dt>
+      <dd class="full"><input id="p_t_min_perm_dist" type="number"> ~ <input id="p_t_max_perm_dist" type="number">(숫자로 기재, 단위 m)</dd>
+      <dt><label for="p_t_instlr">제조사</label></dt>
+      <dd><input type="text" id="p_t_instlr"></dd>
+      <dt><label for="p_t_instl_de">설치일자</label></dt>
+      <dd><input type="text" data-datepicker="date" class="input_calendar" id="p_t_instl_de"></dd>
+      <dt><label for="p_t_bgnde">시작일자</label></dt>
+      <dd><input type="text" data-datepicker="date" class="input_calendar" id="p_t_bgnde"></dd>
+      <dt><label for="p_t_endde">종료일자</label></dt>
+      <dd><input type="text" data-datepicker="date" class="input_calendar" id="p_t_endde"></dd>
+      <dt><label for="p_t_memo">비고</label></dt>
+      <dd class="full"><textarea id="p_t_memo" rows="2"></textarea></dd>
+      <dt><label for="p_t_use_at">사용여부</label></dt>
+      <dd class="full">
+          <div class="switch_toggle">
+              <input type="checkbox" id="p_t_use_at"><label class="useYN" for="p_t_use_at">사용여부</label>
+          </div>
+      </dd>
+  </dl>
+    <div class="p_foot">
+      <div class="renewal_time">(갱신시각 : 2024-07-01 10:10:10)</div>
+      <button type="button" class="btn_blue" onclick="">저장</button>
+      <button type="button" class="btn_gray" onclick="">취소</button>
+    </div>
+  </div>
+</dialog>
+@@include('../../inc/script.html')
+</body>
+</html>

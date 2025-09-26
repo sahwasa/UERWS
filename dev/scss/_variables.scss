@@ -1,0 +1,141 @@
+// Breakpoints
+$breakpoint-mobile: 767px;
+$breakpoint-mobile_tablet: 1024px;
+$breakpoint-tablet: 1300px;
+$breakpoint-desktop: 1600px;
+
+$mainColor:#1e319d;
+$subColor:#e3e8ff;
+$emColor:#15226e;
+// color
+$red:#ff0000;
+$rust:#cd4646;
+$coral:#EC7F7F;
+$mistblue:#579FD7;
+$blue:#1C88F3;
+$green:#3cff00;
+$leaf:#098703;
+$skyblue:#2287f3;
+$btn_blue:#013674;
+$btn_deep:#657484;
+$btn_gray:#aaaaab;
+$deepNavy:#284278;
+$bg_gray:#f5f5f5;
+$bg_blue:#deeeff;
+$bg_yellow:#fffbd0;
+$bg_deep:#8a93ab;
+$border_gray:#e2e2e2;
+$border_deep:#8b94ad;
+// $riskLevel:#ffd200,#ff8b00,#fd1515;
+$riskLevel:#e7b900,#fd1515;
+$connection:#86bf56,$coral,$bg_deep;
+$seismic:#36af07,#00ccfe,#0269fc,#0102fd,#ecff4f,#ddd709,#e0a70b,#de520a,#eb0803,#ba041d;
+$reversed-seismic: reverse($seismic);
+@function reverse($list, $recursive: false) {
+   $result: ();
+   @for $i from length($list)*-1 through -1 {
+      @if type-of(nth($list, abs($i))) == list and $recursive {
+        $result: append($result, reverse(nth($list, abs($i)), $recursive));      
+      }
+      @else {
+        $result: append($result, nth($list, abs($i)));
+      }
+   }
+   @return $result;
+}
+$reverse_seismic:reverse($seismic);
+//font
+@font-face {
+  font-family:'NanumGothic';
+  font-style:normal;
+  font-weight:400;
+  src: url('/font/nanum_gothic/NanumGothic-Regular.eot');
+  src: url('/font/nanum_gothic/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
+       url('/font/nanum_gothic/NanumGothic-Regular.woff2') format('woff2'),
+       url('/font/nanum_gothic/NanumGothic-Regular.woff') format('woff'),
+       url('/font/nanum_gothic/NanumGothic-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family:'NanumGothic';
+  font-style:normal;
+  font-weight:600;
+  src: url('/font/nanum_gothic/NanumGothic-Bold.eot');
+  src: url('/font/nanum_gothic/NanumGothic-Bold.eot?#iefix') format('embedded-opentype'),
+       url('/font/nanum_gothic/NanumGothic-Bold.woff2') format('woff2'),
+       url('/font/nanum_gothic/NanumGothic-Bold.woff') format('woff'),
+       url('/font/nanum_gothic/NanumGothic-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family:'NanumGothic';
+  font-style:normal;
+  font-weight:800;
+  src: url('/font/nanum_gothic/NanumGothic-ExtraBold.eot');
+  src: url('/font/nanum_gothic/NanumGothic-ExtraBold.eot?#iefix') format('embedded-opentype'),
+       url('/font/nanum_gothic/NanumGothic-ExtraBold.woff2') format('woff2'),
+       url('/font/nanum_gothic/NanumGothic-ExtraBold.woff') format('woff'),
+       url('/font/nanum_gothic/NanumGothic-ExtraBold.ttf') format('truetype');
+}
+/* ico_fileName Extention */
+.ico_ext{display:inline-block;width:17px;height:18px;background:url(../images/ico_fileExt.png) -223px -82px no-repeat;margin:0 1px;vertical-align:sub;font-size:0;line-height:0;}
+.ext_bmp{background-position:-3px -2px;}
+.ext_jpg{background-position:-23px -2px;}
+.ext_gif{background-position:-43px -2px;}
+.ext_png{background-position:-63px -2px;}
+.ext_tif{background-position:-83px -2px;}
+.ext_pdf{background-position:-103px -2px;}
+.ext_ppt{background-position:-123px -2px;}
+.ext_ai {background-position:-143px -2px;}
+.ext_xls{background-position:-163px -2px;}
+.ext_psd{background-position:-183px -2px;}
+.ext_doc{background-position:-3px -22px;}
+.ext_hwp{background-position:-23px -22px;}
+.ext_txt{background-position:-43px -22px;}
+.ext_c  {background-position:-63px -22px;}
+.ext_cpp{background-position:-83px -22px;}
+.ext_jav{background-position:-103px -22px;}
+.ext_htm{background-position:-123px -22px;}
+.ext_css{background-position:-143px -22px;}
+.ext_js {background-position:-163px -22px;}
+.ext_log{background-position:-183px -22px;}
+.ext_m4a{background-position:-203px -22px;}
+.ext_swf{background-position:-223px -22px;}
+.ext_au {background-position:-3px -42px;}
+.ext_mid{background-position:-23px -42px;}
+.ext_mod{background-position:-43px -42px;}
+.ext_mp2{background-position:-63px -42px;}
+.ext_mp3{background-position:-83px -42px;}
+.ext_ogg{background-position:-103px -42px;}
+.ext_ra {background-position:-123px -42px;}
+.ext_rm {background-position:-143px -42px;}
+.ext_snd{background-position:-163px -42px;}
+.ext_voc{background-position:-183px -42px;}
+.ext_wav{background-position:-203px -42px;}
+.ext_wma{background-position:-223px -42px;}
+.ext_avi{background-position:-3px -62px;}
+.ext_mov{background-position:-23px -62px;}
+.ext_mpg{background-position:-43px -62px;}
+.ext_mv {background-position:-63px -62px;}
+.ext_asf{background-position:-83px -62px;}
+.ext_asx{background-position:-103px -62px;}
+.ext_qt {background-position:-123px -62px;}
+.ext_rv {background-position:-143px -62px;}
+.ext_wmx{background-position:-163px -62px;}
+.ext_mp4{background-position:-183px -62px;}
+.ext_fla{background-position:-203px -62px;}
+.ext_flv{background-position:-223px -62px;}
+.ext_alz{background-position:-3px -82px;}
+.ext_arj{background-position:-23px -82px;}
+.ext_bzz{background-position:-43px -82px;}
+.ext_egg{background-position:-63px -82px;}
+.ext_gz {background-position:-83px -82px;}
+.ext_jar{background-position:-103px -82px;}
+.ext_rar{background-position:-123px -82px;}
+.ext_tar{background-position:-143px -82px;}
+.ext_tgz{background-position:-163px -82px;}
+.ext_zip{background-position:-183px -82px;}
+.ext_7z {background-position:-203px -82px;}
+.ext_etc{background-position:-223px -82px;}
+.ext_html{background-position:-3px -102px;}
+.ext_wmv {background-position:-23px -102px;}
+.ext_wvz {background-position:-43px -102px;}
+.ext_bzs {background-position:-63px -102px;}

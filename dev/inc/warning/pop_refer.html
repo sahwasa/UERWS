@@ -1,0 +1,133 @@
+<dialog id="pop_wrap_refer" class="pop_wrap_refer" style="--width:1100px">
+  <div class="p_header">
+    <h1>문안 불러오기</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </div>
+  <div class="p_body">
+    <div class="tab box_tab">
+      <ul class="tab_list">
+        <li><a href="#msgHistory" class="on">발령이력</a></li>
+        <li><a href="#msgBox">메시지함</a></li>
+      </ul>
+    </div>
+    <div class="tab_conts">
+      <section id="msgHistory" class="tab_cont">
+        <div class="layout_flex">
+          <div class="tbl_area">
+            <div class="search_area">
+              <ul class="search">
+                <li>
+                  <span class="period period_multi">
+                    <input type="text" id="date_timepicker_start" class="input_calendar" value="YYYY-MM-DD" placeholder="기간 시작일 선택" title="기간 시작일 선택">
+                    <input type="text" id="date_timepicker_end" class="input_calendar" value="YYYY-MM-DD" placeholder="기간 종료일 선택" title="기간 종료일 선택">
+                  </span>
+                  <button type="button" class="btn_skyblue" onclick="search();">검색</button>
+                </li>
+              </ul>
+            </div>
+            <div class="tbl_top">
+              발령현황: <strong id="info">강풍</strong>
+            </div>
+            <div class="tbl_wrap">
+              <table class="tbl_default tbl_s">
+                  <caption>발령 문안 참조</caption>                
+                  <thead>
+                      <tr>
+                        <th scope="col">제목</th>
+                        <th scope="col">발생시각</th>
+                        <th scope="col">발령지역</th>
+                      </tr>
+                  </thead>              
+                  <tbody id="refer_table">
+                    <tr onclick="_popReferFn.click(0, this)">
+                      <td>강풍 시험발령</td>
+                      <td>2024-02-05 17:41:55</td>
+                      <td>울산,경북</td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="linked_right">
+            <div id="tabs" class="tab_wrap refer_txt">
+              <ul>
+                <li><a href="#tabs-1">한국어</a></li>
+                <li><a href="#tabs-2">영어</a></li>
+              </ul>
+              <div id="tabs-1">
+                @@include('../warning/msg_lst.html')
+              </div>              
+              <div id="tabs-2">
+              </div>    
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="msgBox" class="tab_cont">
+        <div class="layout_flex">
+          <div class="tbl_area">                
+            <div class="search_area">         
+              <ul class="search">
+                <li>
+                  <select name="" id="" title="메시지 구분">
+                    <option value="">전체</option>
+                    <option value="">문자</option>
+                    <option value="">단말기</option>
+                    <option value="">음성 등...</option>
+                  </select>
+                </li>
+                <li>              
+                  <input type="text" title="검색어" placeholder="검색어" id="">
+                  <button type="button" class="btn_skyblue" onclick="search();">검색</button>
+                </li>
+              </ul>
+            </div>
+            <div class="tbl_top">
+              발령현황: <strong id="info">강풍 긴급정보</strong>
+            </div>
+            <div class="tbl_wrap">
+              <table class="tbl_default tbl_hover tbl_msg">
+                <caption>메시지함</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">메시지 구분</th>
+                    <th scope="col">제목</th>
+                  </tr>
+                </thead>             
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>문자</td>
+                    <td><pre>장비 시험 방송 1장비 시험 방송 1장비 시험 방송 1장비 시험방송</pre></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>테스트</td>
+                    <td><pre>장비 시험 방송 1</pre></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="linked_right">
+            <div id="tabs" class="tab_wrap">
+              <ul>
+                <li><a href="#tabs-3">한국어</a></li>
+                <li><a href="#tabs-4">영어</a></li>
+              </ul>
+              <div id="tabs-3">
+                @@include('../warning/msg_lst.html')
+              </div>              
+              <div id="tabs-4">                
+              </div>          
+          </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="p_foot">
+      <button type="button" class="btn_blue" onclick="_popReferFn.apply()">적용</button>
+    </div>
+  </div>
+</dialog>

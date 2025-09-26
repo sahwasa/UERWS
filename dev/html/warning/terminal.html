@@ -1,0 +1,264 @@
+@@include('../../inc/top.html')
+<body>
+<div id="wrap">
+  @@include('../../inc/header.html')
+  <div class="con_wrap">
+    @@include('../../inc/warning/lnb.html')
+    <main class="contents">
+      <div class="panel_wrap terminal">
+        <section class="panel">
+          <header class="tit">
+            <h1>재해문자전광판(행정안전부)<em>수동발령</em></h1>
+          </header>
+          <div class="panel_content">
+            <dl class="dl_list">
+              <dt><label for="type">재난유형</label></dt>
+              <dd class="code_wrap">
+                <select title="대분류" id="code1" onchange="setCode2()"><option value="">전체</option><option value="T1">자연재난</option><option value="T2">사회재난</option><option value="T3">기타재난</option></select>
+                <select title="중분류" id="code2" onchange="setCode3()"><option value="">전체</option></select>
+                <select title="소분류" id="code3" onchange="setTitle()"><option value="">선택</option></select>
+              </dd>
+              <dt><label for="_status">재난상황</label></dt>
+              <dd id="_status">               
+                <label for="status_Actual"><input type="radio" name="status" value="Actual" id="status_Actual">실제</label>
+                <label for="status_Exercise"><input type="radio" name="status" value="Exercise" id="status_Exercise">훈련</label>
+                <label for="status_Test"><input type="radio" name="status" value="Test" id="status_Test">시험</label>
+              </dd>
+              <dt><label for="headline">제목</label></dt>
+              <dd>
+                <input type="text" id="headline" placeholder="제목을 입력하세요">
+              </dd>
+              <!-- <dt><label for="type1">발령매체</label></dt>
+              <dd>
+                <ul class="media_select_marker" id="media_select_marker">                  
+                  <li><input type="checkbox" name="deviceType" value="VNS" id="media_VNS"><label for="media_VNS">버스정보시스템</label></li>
+                  <li><input type="checkbox" name="deviceType" value="VNS" id="media_VNS"><label for="media_VNS">재해문자전광판</label></li>
+                  <li><input type="checkbox" name="deviceType" value="VNS" id="media_VNS"><label for="media_VNS">마을방송시스템</label></li>
+                  <li><input type="checkbox" name="deviceType" value="VNS" id="media_VNS"><label for="media_VNS">자동음성통보시스템</label></li>
+                </ul>
+              </dd> -->
+              <dt>발생시각</dt>
+              <dd>
+                <span class="datetimepicker_wrap">
+                  <input type="text" id="datetimepicker_" title="date" class="input_calendar" data-datepicker="datetime" value="발생시각 선택">
+                </span>
+                <button type="button" class="btn_skyblue" onclick="setDateTimeNow()">현재시각</button>
+              </dd>
+              <dt>종료시각</dt>
+              <dd>
+                <span class="datetimepicker_wrap">
+                  <input type="text" id="datetimepicker_" title="date" class="input_calendar" data-datepicker="datetime" value="종료시각 선택">
+                </span>
+              </dd>
+              <dt>발송구분</dt>
+              <dd>
+                <label for="instantly"><input type="radio" name="send_type" id="instantly" data-selectEvt checked>즉시발송</label>
+                <label for="reserve"><input type="radio" name="send_type" value="Time" id="reserve" data-selectEvt="reserve">예약발송</label>
+              </dd>
+              <dd id="reserveTime" data-selectTarget>
+                <span class="datetimepicker_wrap">
+                  <input type="text" id="" data-datepicker="datetime" class="input_calendar" value="발송시각 선택">
+                </span>
+              </dd>
+              <dd id="reserveTime" data-selectTarget>
+                <span class="datetimepicker_wrap">
+                  <input type="text" id="" data-datepicker="datetime" class="input_calendar" value="발송시각 선택">
+                </span>
+              </dd>              
+            </dl>            
+            <div class="opt_area">              
+              <section class="opt_wrap">
+                <header class="tit">
+                  <h2>재해문자전광판 추가옵션</h2>                
+                </header>
+                <dl class="dl_list">
+                  <dt><label for="">표시효과</label></dt>
+                  <dd>
+                    <ul>
+                      <li>
+                        <select name="" id="" class="ipt_full"><option value="">아래에서부터 위로 서서히 올라가며 점점 빨라지며 바운스됨ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ</option></select>
+                      </li>
+                      <li>
+                        <label for="">속도
+                          <select name="" id="">
+                            <option value="">1(빠름)</option>
+                            <option value="">8(느림)</option>
+                          </select>                        
+                        </label>
+                        <label for="">표시 유지시간
+                          <select name="" id=""><option value=""></option></select> 초                  
+                        </label>
+                      </li>
+                    </ul>
+                  </dd><dt><label for="">완료효과</label></dt>
+                  <dd>
+                    <ul>
+                      <li>
+                        <select name="" id="" class="ipt_full"><option value="">아래에서부터 위로 서서히 올라감</option></select>
+                      </li>
+                      <li>
+                        <label for="">속도
+                          <select name="" id="">
+                            <option value="">1(빠름)</option>
+                            <option value="">8(느림)</option>
+                          </select>                        
+                        </label>                     
+                      </li>
+                    </ul>
+                  </dd>                
+                  <dt><label for="">싸이렌 출력</label></dt>
+                  <dd>
+                    <div class="switch_toggle">
+                      <input type="checkbox" id="useYN1"><label class="useYN" for="useYN1">사용여부</label>
+                    </div>
+                  </dd>
+                </dl>
+              </section>
+              <span class="btn_switch_single">
+                <input type="checkbox" id="add_opt">
+                <label for="add_opt" class="btn_opt" data-on="+ 추가옵션 사용하기" data-off="- 추가옵션 사용안함">추가옵션</label>
+              </span>
+            </div>
+            <div class="select_terminal">
+              <header class="dot_tit tbl_top">
+                <h1>발송단말기 선택</h1>
+                <div class="tool check">                   
+                  <select name="" id="" title="시군구"><option value="">시군구</option></select>
+                  <select name="" id="" title="읍면동"><option value="">읍면동</option></select>
+                  <button type="button" class="btn_skyblue">검색</button>
+                </div>
+              </header>
+              <section>
+                <div class="tbl_wrap" style="--h:380px">
+                  <table class="tbl_default tbl_hover">
+                    <caption>버스정보</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">선택</th>
+                        <th scope="col">번호</th>
+                        <th scope="col">설치지역</th>
+                        <th scope="col">단말기명</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="checkbox"></td>
+                        <td>1</td>
+                        <td>울산 지좌동</td>
+                        <td>(지좌동)마장 경로당</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+        <section class="panel">
+          <div class="map_content">
+            <div class="target_lst">
+              <header class="tit">
+                <h2>발송대상 단말기</h2>
+                <b class="count">
+                  (전체 <span id="count_all">2</span>개)
+                </b>
+              </header>
+              <div class="tbl_area">         
+                <div class="tbl_wrap">
+                  <table class="tbl_default tbl_hover">
+                    <caption>발송대상자</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">설치지역</th>
+                        <th scope="col">단말기명</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>울산 지좌동</td>
+                        <td>(지좌동)마장 경로당</td>
+                      </tr>
+                    </tbody>
+                  </table>          
+                </div>
+              </div>
+            </div>
+            <div class="symbols">                                 
+              <label for="t1" class="marker BIS" style="--left:200px;--top:100px">
+                <input type="checkbox" id="t1" checked>00지구 00회관(단말기명)
+              </label>
+              <label for="t2" class="marker CDB" style="--left:200px;--top:200px">
+                <input type="checkbox" id="t2" checked>00지구 00회관(단말기명)
+              </label>
+              <label for="t3" class="marker LDB" style="--left:200px;--top:300px">
+                <input type="checkbox" id="t3" checked>00지구 00회관(단말기명)
+              </label>
+              <label for="t4" class="marker TDB" style="--left:200px;--top:400px">
+                <input type="checkbox" id="t4">00지구 00회관(단말기명)
+              </label>
+              <label for="t5" class="marker PDB" style="--left:200px;--top:500px">
+                <input type="checkbox" id="t5">00지구 00회관(단말기명)
+              </label>
+              <label for="t6" class="marker ADD" style="--left:200px;--top:600px">
+                <input type="checkbox" id="t6">00지구 00회관(단말기명)
+              </label>
+              <label for="t7" class="marker VBS" style="--left:400px;--top:100px">
+                <input type="checkbox" id="t7" checked>00지구 00회관(단말기명)
+              </label>
+              <label for="t8" class="marker VNS" style="--left:400px;--top:200px">
+                <input type="checkbox" id="t8">00지구 00회관(단말기명)
+              </label>
+              <label for="t9" class="marker VNI" style="--left:400px;--top:300px">
+                <input type="checkbox" id="t9">00지구 00회관(단말기명)
+              </label>
+              <label for="t10" class="marker VNO" style="--left:400px;--top:400px">
+                <input type="checkbox" id="t10">00지구 00회관(단말기명)
+              </label>
+              <label for="t11" class="marker RAS" style="--left:400px;--top:500px">
+                <input type="checkbox" id="t11">00지구 00회관(단말기명)
+              </label>
+              <label for="t12" class="marker DSB" style="--left:400px;--top:600px">
+                <input type="checkbox" id="t12">00지구 00회관(단말기명)
+              </label>                
+            </div>
+            <div class="ol-viewport"> 
+            </div>
+            <div class="btn_map">
+              <button class="btn on" id="mapmode_1" onclick="mapMode(1)">기본지도</button>
+              <button class="btn" id="mapmode_2" onclick="mapMode(2)">2D지도</button>
+              <button class="btn" id="mapmode_3" onclick="mapMode(3)">위성지도</button>
+            </div> 
+          </div>          
+        </section>
+        <section class="panel">
+          <div class="panel_content flex_vertical">           
+            <div class="btn_top">              
+              <button type="button" class="btn_skyblueline" onclick="document.querySelector('.pop_wrap_refer').show();">문안 불러오기</button>
+            </div>
+            <div id="tabs" class="tab_wrap">
+              <ul>
+                <li><a href="#tabs-1">한국어</a></li>
+                <li><a href="#tabs-2">영어</a></li>
+              </ul>
+              <div id="tabs-1">
+                @@include('../../inc/warning/msg_lst.html')
+              </div>
+              <div id="tabs-2">
+              </div>
+            </div>
+            <div class="btn_wrap">
+              <button type="button" class="btn_blue" id="btn_sendRequest" onclick="sendRequest()">승인요청</button>                
+            </div>
+          </div>      
+        </section>
+                
+      </div>
+    </main>      
+  </div>
+</div>
+@@include('../../inc/warning/pop_terminalBook.html')
+@@include('../../inc/warning/pop_refer.html')
+@@include('../../inc/warning/pop_map.html')
+@@include('../../inc/script.html')
+</body>
+</html>

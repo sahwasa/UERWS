@@ -1,0 +1,110 @@
+<dialog id="pop_report" class="pop_report" style="--width:1000px">
+  <div class="p_header">
+    <h1>발령이력 보고서</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </div>
+  <div class="p_body">
+    <article class="report_wrap">
+      <div class="report_tit">
+        <h1>발령이력 보고서</h1>
+        <span class="report_date">보고일 ( 2023-10-10 )</span>
+      </div>
+      <div class="report_body">
+        <section>
+          <h2>유형</h2>
+          <span>자동, 실제</span>
+        </section>          
+        <section>
+          <h2>재난정보</h2>
+          <span>자연재난 &sol; 호우 긴급정보</span>
+        </section>          
+        <section>
+          <h2>발생시각</h2>
+          <span>2024-05-06 10:32:02</span>
+        </section>          
+        <section>
+          <h2>발령지역</h2>
+          <span>포항시 북구, 포항시 남구</span>
+        </section>
+        <section>
+          <h2>발령내용</h2>
+          @@include('../../inc/warning/msg_lst.html')
+        </section>
+        <section>
+          <h2>수신처별 발령이력</h2>            
+          <div class="tbl_wrap">                
+            <table class="tbl_default tbl_comprehensive_safety">
+              <caption>수신처별 발령이력</caption>
+              <thead>
+                <tr>
+                  <th scope="col">발령매체</th>
+                  <th scope="col">수신처명</th>
+                  <th scope="col">수신자 ID</th>
+                  <th scope="col">전송시각</th>
+                  <th scope="col">응답시각</th>
+                </tr>
+              </thead>
+              <tbody>                   
+                <tr>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section>
+          <h2>단말기별 발령이력</h2>            
+          <div class="tbl_wrap">                
+            <table class="tbl_default tbl_comprehensive_safety">
+              <caption>단말기별 발령이력</caption>
+              <thead>
+                <tr>
+                  <th scope="col">발령매체</th>
+                  <th scope="col">예경보 시스템명</th>
+                  <th scope="col">단말기명</th>
+                  <th scope="col">설치주소</th>
+                  <th scope="col">발송시각</th>
+                  <th scope="col">성공여부</th>
+                  <th scope="col">메모</th>
+                </tr>
+              </thead>
+              <tbody>                   
+                <tr>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>          
+      </div>
+    </article>
+  </div>
+</dialog>
+
+<dialog id="p_issue" class="p_issue" style="--width:400px" open>
+  <div class="p_header">
+    <h1>반려 사유</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </div>
+  <div class="p_cont">
+    <div class="alert_box">
+      <p>해당 요청건이 <b id="reason_text">테스트</b>로 <b>반려</b> 처리되었습니다.</p>
+    </div>
+    <dl class="issue_dtl">
+      <dt>반려자</dt>
+      <dd id="b_off_nm">관리자(재난상황실)</dd>
+      <dt>반려일시</dt>
+      <dd id="b_off_dt">2024-11-29 10:13:09</dd>
+    </dl>
+  </div>
+</dialog>

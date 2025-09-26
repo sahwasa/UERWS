@@ -1,0 +1,116 @@
+@@include('../../inc/top.html')
+<body>
+<div id="wrap">
+  @@include('../../inc/header.html')
+  <div class="con_wrap">
+    @@include('../../inc/admin/lnb.html')
+    <main class="contents">
+      <header class="tit">
+        <h1>재난코드관리</h1>
+      </header>
+      <div class="content disaster_code">
+        <div class="layout_flex">
+          <div class="layout_flex vertical">
+            <section class="section">
+              <header class="tit">
+                <h3>대분류그룹</h3>
+                <div class="tool">
+                  <button type="button" class="btn_skyblue" onclick="document.querySelector('.pop_codeAdmin').show();">추가</button>
+                  <button type="button" class="btn_grayline" onclick="">삭제</button>
+                </div>
+              </header>
+              <div class="tbl_wrap">
+                <table class="tbl_default tbl_hover">
+                  <caption>대분류제목</caption>                 
+                  <thead>
+                    <tr>
+                      <th scope="col">대분류코드</th>
+                      <th scope="col">코드명</th>
+                      <th scope="col">설명</th>
+                      <th scope="col">사용여부</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr onclick="selectDisasterCode1(this, 'T1')" class="on">
+                      <td>T1</td>
+                      <td>자연재난</td>
+                      <td>재난코드 대분류</td>
+                      <td>
+                        <div class="switch_toggle">
+                          <input type="checkbox" id="useYN1"><label class="useYN" for="useYN1">사용여부</label>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr onclick="selectDisasterCode1(this, 'T2')">
+                      <td>T1</td>
+                      <td>자연재난</td>
+                      <td>재난코드 대분류</td>
+                      <td>
+                        <div class="switch_toggle">
+                          <input type="checkbox" id="useYN1"><label class="useYN" for="useYN1">사용여부</label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <section>
+              <header class="tit">
+                <h3>중분류그룹</h3>
+                <div class="tool">
+                  <button type="button" class="btn_skyblue" onclick="">추가</button>
+                  <button type="button" class="btn_grayline" onclick="">삭제</button>
+                </div>
+              </header>
+              <div class="tbl_wrap tbl_hover">
+                <table class="tbl_default">
+                  <caption>중분류제목</caption>            
+                  <thead>
+                    <tr>
+                      <th>중분류코드</th>
+                      <th>코드명</th>
+                      <th>설명</th>
+                      <th>사용여부</th>
+                    </tr>
+                  </thead>                  
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>              
+            </section>
+          </div>
+          <section class="section">
+            <header class="tit">
+              <h3>상세그룹</h3>
+              <div class="tool">
+                <button type="button" class="btn_skyblue" onclick="">추가</button>
+                <button type="button" class="btn_grayline" onclick="">삭제</button>
+              </div>
+            </header>
+            <div class="tbl_wrap">
+              <table class="tbl_default">
+                <caption>상세그룹 제목</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">선택</th>
+                    <th scope="col">코드</th>
+                    <th scope="col">코드명</th>
+                    <th scope="col">사용여부</th>
+                    <th scope="col">상세보기</th>
+                  </tr>
+                </thead>                 
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>          
+    </main>
+  </div>  
+</div>
+@@include('../../inc/admin/pop_codeAdmin.html')
+@@include('../../inc/script.html')
+</body>
+</html>

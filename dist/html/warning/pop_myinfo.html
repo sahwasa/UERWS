@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>강원도 - 재난 상황전파 핫라인 전송시스템</title>
+  <link rel="stylesheet" type="text/css" href="../plugins/axicon/axicon.min.css" />
+  <link rel="stylesheet" type="text/css" href="../plugins/jquery-ui/themes/base/jquery-ui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/sub.css" />
+  <link rel="stylesheet" type="text/css" href="../css/pop.css" />
+  <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
+
+  <script src="../plugins/jquery/jquery.js" charset="utf-8"></script>
+  <script src="../plugins/jquery-ui/jquery-ui.min.js" charset="utf-8"></script>
+  <script src="../plugins/jquery-mousewheel/jquery.mousewheel.min.js" charset="utf-8"></script>
+  <script src="../js/common.js" charset="utf-8"></script>
+</head>
+
+<body>
+<!-- popup 비밀번호변경 -->
+<div class="overlay">
+  <div class="pop_wrap" dataformat="modal" style="width:400px;margin:-280px 0 0 200px;">
+    <div class="pop_header">
+      <h1>비밀번호 변경</h1>
+      <span><a href="#" class="btn_close axi axi-close">닫기</a></span>
+    </div>
+    <div class="body">
+      <p class="box_gray">
+        8~16자의 영문 대소문자, 숫자, 특수문자만 가능합니다.
+      </p>
+      <dl class="layout_dl layout_dl_s change_pw">
+        <dt><label for="" class="required">현재 비밀번호</label></dt>
+        <dd>
+          <input type="password" value="abcdefg"/>
+        </dd>
+        <dt><label for="" class="required">새 비밀번호</label></dt>
+        <dd>
+          <input type="password" value="abcdefg"/>
+        </dd>
+        <dt><label for="" class="required">확인</label></dt>
+        <dd>
+          <input type="password" value="abcdefg"/>
+        </dd>
+      </dl>
+      <div class="btn_wrap">
+        <a href="" class="btn btn_red">확인</a>
+        <a href="" class="btn btn_gray">취소</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- popup 비밀번호변경__e -->
+
+<!-- popup -->
+<div class="overlay">
+<div class="pop_wrap" dataformat="modal" style="width:400px;margin:-280px 0 0 -200px;">
+  <div class="pop_header">
+    <h1>내정보</h1>
+    <span><a href="#" class="btn_close axi axi-close">닫기</a></span>
+  </div>
+  <div class="body">
+    <dl class="layout_dl layout_dl_s my_info">
+      <dt>ID</dt>
+      <dd>admin</dd>
+      <dt><label for="" class="required">비밀번호</label></dt>
+      <dd class="with_btn">
+        <input type="password" value="abcdefg"/><a href="" class="fr btn btn_skyblue">변경</a>
+      </dd>
+      <dt><label for="" class="required">소속기관</label></dt>
+      <dd><input type="text" value="강원도청" /></dd>
+      <dt><label for="" class="required">부서</label></dt>
+      <dd><input type="text" value="안전총괄과" /></dd>
+      <dt><label for="">직급</label></dt>
+      <dd><input type="text" value="주무관" /></dd>
+      <dt class="label required">연락처</dt>
+      <dd>
+        <ul class="connect_wrap">
+          <li>
+            <i class="axi axi-phone"></i>
+            <input type="text" title="전화번호" placeholder="전화번호" />
+          </li>
+          <li>
+            <i class="axi axi-phone-android"></i>
+            <input type="text" title="휴대전화번호" placeholder="휴대전화번호" />
+          </li>
+          <li>
+            <i class="axi axi-print2"></i>
+            <input type="text" title="팩스번호" placeholder="팩스번호" />
+          </li>
+        </ul>
+      </dd>
+      <dt class="label">시스템권한</dt>
+      <dd>
+        <select class="" name="">
+          <option value="">관리자</option>
+          <option value="">운영자</option>
+          <option value="">일반</option>
+        </select>
+      </dd>
+      <dt class="label">사용권한</dt>
+      <dd>
+        <select class="" name="">
+          <option value="">담당자</option>
+          <option value="">승인자</option>
+          <option value="">일반</option>
+        </select>
+      </dd>
+    </dl>
+    <div class="btn_wrap">
+      <a href="" class="btn btn_red">수정</a>
+      <a href="" class="btn btn_gray">취소</a>
+    </div>
+  </div>
+</div>
+</div>
+<!-- popup__e -->
+
+<div id="wrap">
+  <header id="header">
+  <h1 class="main_logo">
+    <a href="/main.do">
+      <img src="../../images/logo.png" alt="지자체 재난 예경보 통합플랫폼">
+    </a>
+  </h1>
+  <nav class="gnb">
+    <ul class="gnb_lst">
+      <li class="on"><a href="../../html/gis/gis_mntr.html">GIS 상황판</a></li>
+      <li><a href="../../html/cctv/integrated_ctrl.html">CCTV 통합관제</a></li>
+      <li><a href="">IOT 관측자료</a></li>
+      <li><a href="../../html/warning/monitoring.html">재난예경보</a></li>
+    </ul>
+  </nav>
+  <div class="util_wrap">
+    <ul class="util_lst">
+      <li>
+        <button type="button" class="btn user" onclick="showMyInfo()">내정보 보기 및 수정</button>
+        <span><b id="top_user_nm">김관리</b>님</span>
+      </li>
+
+      <li><a href="../../html/set/user.html" class="btn set">환경설정</a></li>
+      
+      <li class="alert_wrap" title="재난발령요청">
+        <a href="#" class="btn alert">재난발령요청</a>
+        <span class="on" id="alert_counter">0</span>
+      </li>      
+      
+      <li class="alert_wrap" onclick="open_accdent_popup()" title="돌발상황">
+        <a href="#" class="btn unexpected">돌발상황</a>
+        <span class="on" id='accident_counter'>2</span>
+      </li>
+      
+      <li title="연계상태"><span class="system">연계상태</span></li>
+      <li title="로그아웃"><a href="/login.do" class="btn log">로그아웃</a></li>
+    </ul>
+      <!-- <div class="system_wrap" style="cursor:pointer;">
+        <span class="system">시스템</span>
+      </div> -->
+  </div>
+</header>
+
+  <div id="container">
+  <!-- lnb -->
+  	<div id="lnb">
+  		<div class="user_info">
+  			<a href="#" class=""><i class="axi axi-user user"></i>홍길동</a>님
+        <ul>
+          <li><a href="#" class="axi axi-cog2"> 내정보</a></li>
+          <li><a href="#" class="axi axi-power-off"> 로그아웃</a></li>
+        </ul>
+  		</div>
+      <div class="nav_wrap">
+        <ul class="nav">
+          <li><a href="#" class="axi axi-file2"> 통보문</a>
+            <ul>
+              <li><a href="#" class="axi axi-menu"> 생성 및 발신요청</a></li>
+              <li><a href="#" class="axi axi-menu"> 발송내역</a></li>
+              <li><a href="#" class="axi axi-menu"> 요청내역</a></li>
+              <li><a href="#" class="axi axi-menu"> 상황보고</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="axi axi-pie-chart"> 통계</a>
+            <ul>
+              <li><a href="#" class="axi axi-menu"> 발생지역별 통계</a></li>
+              <li><a href="#" class="axi axi-menu"> 재난유형별 통계</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="axi axi-list-alt"> 수신자관리</a></li>
+          <li><a href="#" class="axi axi-database"> 시스템관리</a>
+            <ul>
+              <li><a href="#" class="axi axi-menu"> 사용자관리</a></li>
+              <li><a href="#" class="axi axi-menu"> 연계시스템</a></li>
+              <li><a href="#" class="axi axi-menu"> 공통코드</a></li>
+              <li><a href="#" class="axi axi-menu"> 로그관리</a></li>
+              <li><a href="#" class="axi axi-menu"> 통보문 양식</a></li>
+            </ul>
+          </li>
+          <li><a href="#" class="axi axi-download2"> 자료실</a></li>
+        </ul>
+      </div>
+      <p class="copyright">© Gangwon Province Government all rights reserved.</p>
+    </div>
+    <!-- lnb__e -->
+
+    <!-- contents -->
+    <div class="contents">
+      <div class="tit">
+        <h1><i class="axi axi-menu"></i> 생성 및 발신요청<span>통보문</span></h1>
+        <div class="locate">
+          <ul>
+            <li><a href="#"><i class="axi axi-ion-home" title="home"></i></a></li>
+            <li><a href="#">통보문</a></li>
+            <li><a href="#">생성 및 발신요청</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="body">
+        <div class="tab_wrap">
+
+          <ul class="tab">
+            <li><a href="#tab01">통보문 생성</a></li>
+            <li><a href="#tab02">최근 발송통보문</a></li>
+          </ul>
+          <div id="tab01" class="tab_contents article">
+            <div class="tit blind">
+              <h2>내용작성</h2>
+            </div>
+            <span class="report_from">
+              <label for="">통보문 양식</label>
+              <select class="" name="">
+                <option value="">자연재해</option>
+              </select>
+              <select class="" name="">
+                <option value="">태풍</option>
+              </select>
+              <a href="#" class="btn btn_skyblue">불러오기</a>
+            </span>
+            <div class="article">
+              <dl class="layout_dl">
+                <dt><label for="" class="required">발생시각</label></dt>
+                <dd>
+                  <input type="text" id="" placeholder="YYYY/MM /DD" readonly class="date" dataformat="datepicker" required />  <input id="" class="timeform" name="" dataformat="time" value="08:30">
+                </dd>
+                <dt><label for="" class="required">발생지역</label></dt>
+                <dd>
+                  <ul class="local">
+                    <li><input type="checkbox" id="local00"><label for="local00">전체</label></li>
+                    <li><input type="checkbox" id="local01"><label for="local01">춘천시</label></li>
+                    <li><input type="checkbox" id="local02"><label for="local02">원주시</label></li>
+                    <li><input type="checkbox" id="local03"><label for="local03">강릉시</label></li>
+                    <li><input type="checkbox" id="local04"><label for="local04">동해시</label></li>
+                    <li><input type="checkbox" id="local05"><label for="local05">태백시</label></li>
+                    <li><input type="checkbox" id="local06"><label for="local06">속초시</label></li>
+                    <li><input type="checkbox" id="local07"><label for="local07">삼척시</label></li>
+                    <li><input type="checkbox" id="local08"><label for="local08">홍천군</label></li>
+                    <li><input type="checkbox" id="local09"><label for="local09">횡성군</label></li>
+                    <li><input type="checkbox" id="local10"><label for="local10">영월군</label></li>
+                    <li><input type="checkbox" id="local11"><label for="local11">평창군</label></li>
+                    <li><input type="checkbox" id="local12"><label for="local12">정선군</label></li>
+                    <li><input type="checkbox" id="local13"><label for="local13">철원군</label></li>
+                    <li><input type="checkbox" id="local14"><label for="local14">화천군</label></li>
+                    <li><input type="checkbox" id="local15"><label for="local15">양구월군</label></li>
+                    <li><input type="checkbox" id="local16"><label for="local16">인제군</label></li>
+                    <li><input type="checkbox" id="local17"><label for="local17">고성군</label></li>
+                    <li><input type="checkbox" id="local18"><label for="local18">양양군</label></li>
+                  </ul>
+                </dd>
+                <dt><label for="" class="required">경보수준</label></dt>
+                <dd>
+                  <ul class="inline_input">
+                    <li><input type="radio" name="warning_lv" id="warning01"><label for="warning01">미설정</label></li>
+                    <li><input type="radio" name="warning_lv" id="warning02"><label for="warning02">관심</label></li>
+                    <li><input type="radio" name="warning_lv" id="warning03"><label for="warning03">주의</label></li>
+                    <li><input type="radio" name="warning_lv" id="warning04"><label for="warning04">경계</label></li>
+                    <li><input type="radio" name="warning_lv" id="warning05"><label for="warning05">심각</label></li>
+                  </ul>
+                </dd>
+                <dt><label for="" class="required">제목</label></dt>
+                <dd><input type="text" class="full" value="태풍으로 발생하는 피해"></dd>
+                <dt><label for="" class="required">통보매체</label></dt>
+                <dd>
+                  <ul class="inline_input">
+                    <li><input type="checkbox" id="media01"><label for="media01">방송국 UDMS</label></li>
+                    <li><input type="checkbox" id="media02"><label for="media02">문자</label></li>
+                    <li><input type="checkbox" id="media03"><label for="media03">FAX</label></li>
+                    <li><input type="checkbox" id="media04"><label for="media04">PC통보</label></li>
+                  </ul>
+                </dd>
+                <dt><span class="label required">통보내용</span>
+                </dt>
+                <dd class="notice_contents">
+                  <h4><label for="">방송국 UDMS</label></h4>
+                  <textarea name="name" rows="10" cols="80" class="mgBtm10">
+                  </textarea>
+                  <h4><label for="">문자 / FAX / PC통보</label></h4>
+                  <textarea name="name" rows="5" cols="80">
+                  </textarea>
+                  <span class="info">
+                    [ #DATE ]  → 발생시각 / [ #AREA ]  → 발생지역
+                  </span>
+                </dd>
+                <dt><label for="">회신문구</label></dt>
+                <dd><input type="text" class="full" value="발표내용에 대한 문의사항은 강원도청(02-6234-2700)으로 연락바랍니다."></dd>
+              </dl>
+            </div>
+            <div class="btn_wrap">
+              <a href="" class="btn btn_gray axi axi-refresh"> 초기화</a>
+              <a href="" class="btn btn_red axi axi-ion-document"> 통보문 생성</a>
+            </div>
+          </div>
+
+          <div id="tab02" class="tab_contents">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- contents__e -->
+  </div>
+
+</div>
+</body>
+</html>
+<script type="text/javascript">
+  $(function(){
+    init();
+  })
+</script>

@@ -1,0 +1,49 @@
+/* pop common */
+.pop_wrap,
+dialog{max-width:var(--width);width:100vw;min-width:360px;box-shadow:2px 2px 29px 0 rgba(0, 0, 0, .2);font-size:13px;z-index:1000;padding:15px 20px;border:1px solid $border_gray;
+  .p_header{display:flex;align-items:center;border-bottom:1px solid $border_gray;padding-bottom:10px;margin-bottom:15px;
+    h1{font-size:15px;font-weight:600;color:#000;}
+    .btn_cross{margin-left:auto;
+      &::before{color:#bdbdbd;font-size:25px;}
+    }
+    .btn_close{margin-left:auto; @include ico_only('\eb2e');
+      &{cursor:pointer;margin-left:20px;width:11px;height:16px;}
+      &::before{font-size:16px;color:#000;};
+    }
+  }
+  .p_body{font-size:13px;letter-spacing:-0.33px;}
+  .tit{margin-bottom:5px;
+    h2{display:flex;gap:8px;align-items:center;font-size:15px;font-weight:600;color:#000;
+      &::before{@include shape(5px, 15px);background-color:$deepNavy;}
+    }
+  }
+  .p_foot{display:flex;justify-content:flex-end;align-items:center;gap:3px;margin-top:8px;
+    button{line-height:32px;padding:0 22px;}
+    .renewal_time{margin-right:auto;color:#657383;}
+  }
+  &::backdrop{background:rgb(190 190 190 / 50%);}
+  .search_area{padding:0;border-width:0;}
+}
+dialog[open]{position:fixed;left:calc(50vw - (var(--width) / 2));top:var(--top, 10vh);}
+.pop_wrap{width:410px;position:fixed;top:50%;left:50%;background-color:#fff;transform:translateX(-50%) translateY(-50%);
+	&.p_receiver_1,
+	&.p_receiver_2{width:800px;}
+	&.p_alert{width:970px;}
+}
+
+.pop_wrap .search.f_sb{justify-content:space-between;}
+.pop_wrap .btn_wrap{padding:16px 0;}
+.pop_wrap table textarea{line-height:22px;}
+.tbl_info label{font-weight:600;}
+.tbl_info th,.tbl_info td{height:30px;padding:3px;background-color:transparent;border:1px solid transparent;text-align:left;}
+.pop_cont .tit{border-bottom:1px solid #005aab;margin-bottom:10px;padding-bottom:5px;}
+.pop_cont .tit h2{font-size:16px;font-weight:600;color:#005aab;}
+.pop_cont .search_area{margin-bottom:15px;}
+.pop_cont .search{width:auto;}
+.pop_box{width:100%;padding:15px 20px;border:1px solid #c7c7c7;border-width:1px 0;text-align:center;}
+.pop_box .alert{display:inline-block;width:30px;height:30px;margin:10px 0 15px;background:url(../images/ico_warning.png)no-repeat;text-indent:-9999px;text-align:center;}
+.pop_box p{align-self:center;font-size:13px;line-height:23px;}
+
+.tbl_userinfo{
+  td{font-family:'notokrL';color:#555;}
+}

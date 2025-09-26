@@ -1,0 +1,126 @@
+@@include('../../inc/top.html')
+<body>
+<div id="wrap">
+  @@include('../../inc/header.html')
+  <div class="con_wrap">
+    @@include('../../inc/admin/lnb.html')
+    <main class="contents">
+      <header class="tit">
+        <h1>수신처관리</h1>
+      </header>
+      <div class="content dest_admin">
+        <div class="search_area">
+          <ul class="search">
+            <li>
+              <input type="text" title="location" id="search_dest_id" placeholder="수신처명" onkeydown="fn_onKeyDown(4);">
+              <button type="button" class="btn_skyblue" onclick="getDestList()">검색</button>
+            </li>
+          </ul>
+        </div>
+        <div class="tbl_area">
+          <div class="tbl_top">
+            <div class="tool">
+              <button type="button" class="btn_skyblue" onclick="document.querySelector('.pop_destAdmin').show();">추가</button>
+              <button type="button" class="btn_grayline" onclick="deleteDest()">삭제</button>
+            </div>
+          </div>
+          <div class="tbl_wrap">
+            <table class="tbl_default tbl_hover">
+              <caption>수신처관리</caption>              
+              <thead>
+                <tr>
+                  <th scope="col">선택</th>
+                  <th scope="col">수신처명</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">IP</th>
+                  <th scope="col">담당자</th>
+                  <th scope="col">연락처</th>
+                  <th scope="col">등록일</th>
+                  <th scope="col">사용여부</th>
+                  <th scope="col">수정</th>
+                </tr>
+              </thead>              
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" name="checkbox_tab4" value="kbs_uhd"></td>
+                  <td>KBS 울산방송</td>
+                  <td>kbs_uhd</td>
+                  <td>122.199.200.232</td>
+                  <td>KBS 울산방송</td>
+                  <td>010-0000-0000</td>
+                  <td>2023-11-21 12:29:45</td>
+                  <td>
+                    <div class="switch_toggle">
+                      <input type="checkbox" id="useYN1-1"><label class="useYN" for="useYN1-1">사용여부</label>
+                    </div>
+                  </td>
+                  <td>
+                    <button type="button" class="btn_edit" onclick="showDestInfo('kbs_uhd')">수정</button>
+                    <button type="button" class="btn_del">삭제</button>                  
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>      
+    </main>
+  </div>  
+</div>
+<!-- popup -->
+<dialog id="pop_destAdmin" class="pop_destAdmin" open style="--width:800px;">
+  <header class="p_header">
+    <h1>수신처 추가 및 수정</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <dl class="dl_list column2">
+      <dt><label for="" class="required">ID</label></dt>
+      <dd><input type="text" value="abcdefg" disabled /></dd>
+      <dt><label for="" class="required">수신처명</label></dt>
+      <dd><input type="text" id="" ></dd>
+      <dt><label for="" class="required">비밀번호</label></dt>
+      <dd><input type="password" value=""/></dd>
+      <dt><label for="" class="required">비밀번호 확인</label></dt>
+      <dd><input type="password" value=""/></dd>
+      <dt><label for="" class="required">담당자</label></dt>
+      <dd><input type="text" id="" ></dd>
+      <dt><label for="" class="required">연락처</label></dt>
+      <dd><input type="text" id="" ></dd>
+      <dt><label for="" class="required">IP</label></dt>
+      <dd><input type="text" id="" ></dd>
+      <dt class="break"><label for="" class="required">발령대상</label></dt>
+      <dd class="full">
+        <ul class="media_select" id="media_select">
+          <li><label for="media_I-C-BC1.0"><input type="checkbox" name="media" value="I-C-BC1.0" id="media_I-C-BC1.0">재난방송(UHD)</label></li>
+          <li><label for="media_BIS"><input type="checkbox" name="deviceType" value="BIS" id="media_BIS">버스정보시스템</label></li>
+          <li><label for="media_CDB"><input type="checkbox" name="deviceType" value="CDB" id="media_CDB">재해문자전광판(행안부)</label></li>
+          <li><label for="media_LDB"><input type="checkbox" name="deviceType" value="LDB" id="media_LDB">재해문자전광판(지자체)</label></li>
+          <li><label for="media_VBS"><input type="checkbox" name="deviceType" value="VBS" id="media_VBS">마을방송시스템</label></li>
+          <li><label for="media_VNS"><input type="checkbox" name="deviceType" value="VNS" id="media_VNS">자동음성통보시스템</label></li>
+          <li><label for=""><input type="checkbox" name="deviceType" value="" id="">문자발송</label></li>
+        </ul>
+
+      </dd>
+      <dt>대상지역</dt>
+      <dd class="full">
+        <select name="" id=""><option value="">시도</option></select>
+        <select name="" id=""><option value="">시군구</option></select>      
+        <select name="" id=""><option value="">읍면동</option></select>
+        <button type="button" class="btn_skyblue">추가</button>
+      </dd>
+      <dd class="full">
+        <ul class="selected_lst">
+          <li>울산<button type="button" class="btn_delete_s" onclick="removeSelected('3100000000')">선택해제</button></li>                               
+        </ul>
+      </dd>
+    </dl>    
+    <div class="p_foot">
+      <button type="button" class="btn_blue">확인</button>
+      <button type="button" class="btn_gray">취소</button>
+    </div>
+  </div>
+</dialog>
+@@include('../../inc/script.html')
+</body>
+</html>

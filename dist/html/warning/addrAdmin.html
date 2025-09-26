@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>지자체 재난 예경보 통합플랫폼</title>
+  <link rel="shortcut icon" type="image/x-icon" href="../../images/favicon.png">
+  <link rel="stylesheet" href="../../plugins/axicon/axicon.min.css">
+  <link rel="stylesheet" href="../../plugins/jquery-ui/themes/base/jquery-ui.min.css">
+  <link rel="stylesheet" href="../../plugins/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.css">
+  <link rel="stylesheet" href="../../plugins/jqueryui-timepicker-addon/dist/jquery.datetimepicker.css">
+  <link rel="stylesheet" href="../../font/fontello/css/fontello.css">
+  <link rel="stylesheet" href="../../css/cmmn.css">
+  <link rel="stylesheet" href="../../css/warning.css">
+  <link rel="stylesheet" href="../../css/tui-pagination.css">
+  <script src="../../plugins/jquery/dist/jquery.min.js"></script>
+  <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="../../plugins/jquery-ui/ui/i18n/datepicker-ko.js"></script>
+  <script src="../../plugins/jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.js"></script>
+  <script src="../../plugins/jqueryui-timepicker-addon/dist/jquery.datetimepicker.full.min.js"></script>
+  <!-- <script src="../../plugins/jqueryui-timepicker-addon/dist/i18n/jquery-ui-timepicker-ko.js"></script> -->
+  <script src="../../plugins/echarts/dist/echarts.min.js"></script>
+  <!-- <script src="../../js/tui-pagination.js"></script> -->
+  <script src="../../js/common.js"></script>
+  <script src="../../js/ui_common.js"></script>
+
+</head>
+
+
+<body>
+<div id="wrap">
+  <header id="header">
+  <h1 class="main_logo">
+    <a href="/main.do">
+      <!-- <img src="../../images/logo.png" alt="정부로고">지자체 재난 예경보 통합플랫폼 -->
+      <!-- <img src="../../images/3100000000.png" alt="울산시로고">울산시 재난 예경보 통합플랫폼 -->
+      <!-- <img src="../../images/4311000000.png" alt="청주시로고">청주시 재난 예경보 통합플랫폼 -->
+      <!-- <img src="../../images/4278000000.png" alt="철원군로고">철원군 재난 예경보 통합플랫폼 -->
+      <img src="../../images/logo/5280000000.png" alt="철원군로고">철원군 재난 예경보 통합플랫폼</a>
+  </h1>  
+  <div class="util_wrap">
+    <ul class="util_lst">
+      <li>
+        <button type="button" class="btn user" onclick="document.querySelector('#pop_myInfo').show()">내정보 보기 및 수정</button>
+        <span><b id="top_user_nm">김관리</b>님</span>
+      </li>
+      <li><a href="../../html/admin/user.html" class="btn set" title="시스템관리">시스템관리</a></li>
+      <li class="alert_wrap" title="재난발령요청">
+        <a href="javascript:(document.querySelector('#p_alert').show())" class="btn alert">재난발령요청</a>
+        <span class="on" id="alert_counter">0</span>
+      </li>      
+      <li class="alert_wrap" onclick="open_accdent_popup()" title="돌발상황">
+        <a href="#" class="btn unexpected">돌발상황</a>
+        <span class="on" id='accident_counter'>2</span>
+      </li>
+      <li title="연계상태"><a href="javascript:(document.querySelector('#p_stats').show())" class="system">연계상태</a></li>
+      <li title="로그아웃"><a href="login.html" class="btn log">로그아웃</a></li>
+    </ul>
+      <!-- <div class="system_wrap" style="cursor:pointer;">
+        <span class="system">시스템</span>
+      </div> -->
+  </div>
+</header>
+  <div class="con_wrap">
+     <nav class="lnb lnb_warning">
+  <ul id="left_menu">
+    <li class="on"><a href="../../html/warning/monitoring.html">실시간 모니터링</a></li>
+    <li><a href="../../html/warning/result.html">발령현황</a></li>
+    <li><a href="../../html/warning/manual.html">수동발령</a>
+      <ul class="sub_manual">
+        <li><a href="../../html/warning/manual.html">통합발령</a></li>
+        <li>
+          <dl>
+            <dt>단말기발송</dt>
+            <dd class="on" ><a href="../../html/warning/terminal.html" class="BIS">버스정보시스템</a></dd>
+            <dd><a href="CDB" class="CDB">재해문자전광판(행안부)</a></dd>
+            <dd><a href="LDB" class="LDB">재해문자전광판(지자체)</a></dd>
+            <dd><a href="TDB" class="TDB">교통전광판</a></dd>
+            <dd><a href="PDB" class="PDB">전광판(민간)</a></dd>
+            <dd><a href="ADD" class="ADD">자율주행표시장치(C-ITS)</a></dd>
+            <dd><a href="VBS" class="VBS">마을방송시스템</a></dd>
+            <dd><a href="VNS" class="VNS">자동음성통보시스템</a></dd>
+            <dd><a href="VNI" class="VNI">자동음성통보시스템(실내)</a></dd>
+            <dd><a href="VNO" class="VNO">자동음성통보시스템(실외)</a></dd>
+            <dd><a href="RAS" class="RAS">자동우량경보시스템</a></dd>
+            <dd><a href="DSB" class="DSB">디지털사이니지</a></dd>
+          </dl>
+        </li>
+        <li><a href="../../html/warning/mms.html" class="mms">문자발송</a></li>
+      </ul>    
+    </li>
+    <li><a href="../../html/warning/history.html">발령이력</a></li>
+    <li><a href="../../html/warning/terminalAdmin.html">예경보장치관리</a></li>       
+    <li><a href="../../html/warning/template.html">문안관리</a></li>       
+    <!-- <li><a href="../../html/admin/admin.html">시스템관리</a></li>      -->
+  </ul>
+</nav>
+     <main class="contents">
+        <div class="panel_wrap addr">
+          <section class="panel panel_main">
+            <header class="tit">
+              <h1>주소록 관리</h1>
+            </header>
+            <div class="panel_content">      
+              <div class="lst_status all_lst_ctrl">
+                <label for="all" class="all"><input type="checkbox" id="all">전체선택</label>
+                <div class="tool">
+                  <button type="button" class="btn_skyblue" data-click="add_group">그룹추가</button>               
+                </div>
+              </div>
+              <ul id="addrLst" class="check_lst lst_ctrl">
+                <li>
+                  <strong>
+                    <label for="dong1"><input type="checkbox">이·통·반장</label>
+                    <button type="button" class="btn_modify_s" title="수정" data-clickevt="modify">수정</button>
+                    <button type="button" class="btn_del_s" title="삭제" data-clickevt="del">삭제</button>
+                  </strong>
+                </li>
+                <li>
+                  <strong>
+                    <label for=""><input type="checkbox">재난도우미</label>
+                    <button type="button" class="btn_modify_s" title="수정" data-clickevt="modify">수정</button>
+                    <button type="button" class="btn_del_s" title="삭제" data-clickevt="del">삭제</button>
+                  </strong>
+                </li>
+                <li>
+                  <strong>
+                    <label for=""><input type="checkbox">노인도우미</label>
+                    <button type="button" class="btn_modify_s" title="수정" data-clickevt="modify">수정</button>
+                    <button type="button" class="btn_del_s" title="삭제" data-clickevt="del">삭제</button>
+                  </strong>
+                </li>
+              </ul>
+            </div>
+          </section>
+          <section class="panel panel_sub">
+            <div class="panel_content flex_panel">
+              <div class="search_area">                
+                <ul class="search">
+                  <li>
+                    <select name="" id=""><option value="">시도</option></select>
+                  </li>                          
+                  <li>
+                    <select name="" id=""><option value="">시군구</option></select>
+                  </li>                          
+                  <li>
+                    <select title="검색 유형" id="">
+                      <option value="">성명</option>
+                      <option value="">그룹명</option>
+                    </select>
+                    <input type="text" title="검색어" placeholder="검색어" id="">
+                    <button type="button" class="btn_skyblue" onclick="search();">검색</button>
+                  </li>
+                </ul>
+              </div>
+              <div class="tbl_area">                
+                <div class="tbl_top">
+                  <p>
+                    전체 <span id="count_all">556</span>건 /
+                    <b class="font_blue">(<span id="count_R">0</span>개 선택됨)</b>
+                  </p>
+                  <div class="tool">
+                    <button type="button" class="btn_skyblue" onclick="document.querySelector('#pop_addrAdmin').show()">추가</button>
+                    <button type="button" class="btn_grayline">삭제</button>
+                    <span class="divide">
+                      <button type="button" class="btn_green" onclick="document.querySelector('#pop_upload').show()">엑셀 업로드</button>
+                      <button type="button" class="btn_greenline">양식 다운로드</button>
+                      <button type="button" class="btn_greenline">주소록 다운로드</button>
+                    </span>
+                  </div>
+                </div>
+                <div class="tbl_wrap">
+                  <table class="tbl_default">
+                    <thead>
+                      <tr>
+                        <th scope="col"><input type="checkbox" title="전체선택" class="all_check row_check"></th>
+                        <th scope="col">번호</th>
+                        <th scope="col">그룹</th>
+                        <th scope="col">성명</th>
+                        <th scope="col">모바일</th>
+                        <th scope="col">전화번호</th>
+                        <th scope="col">지역</th>
+                        <th scope="col">소속</th>
+                        <th scope="col">관리</th>
+                      </tr>
+                    </thead>
+                    <tbody>                      
+                      <tr>
+                        <td><input type="checkbox" title="줄선택" class="row_check"></td>
+                        <td>1</td>
+                        <td><span class="tag_group">2023년 재난도우미</span></td>
+                        <td>고길동</td>
+                        <td>010-1234-5678</td>
+                        <td>-</td>
+                        <td>서울시 도봉구 쌍문동</td>
+                        <td>민간인</td>
+                        <td>
+                          <button type="button" class="btn_edit">수정</button>
+                          <button type="button" class="btn_del">삭제</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" title="줄선택" class="row_check"></td>
+                        <td>2</td>
+                        <td><span class="tag_group">이·통·반장</span><span class="tag_group">재난도우미</span><span class="tag_group">노인도우미</span></td>
+                        <td>둘리</td>
+                        <td>010-1234-5678</td>
+                        <td>-</td>
+                        <td>경기도 부천시 원미구 상1동</td>
+                        <td>-</td>
+                        <td>
+                          <button type="button" class="btn_edit">수정</button>
+                          <button type="button" class="btn_del">삭제</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+     </main>
+  </div>
+</div>
+<dialog id="pop_addrAdmin" class="pop_addrAdmin" style="--width:600px">
+  <div class="p_header">
+    <h1>연락처 추가 및 수정</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </div>
+  <div class="p_body">    
+    <dl class="dl_list column2">
+      <dt><label for="" class="required">그룹</label></dt>
+      <dd class="full"><select name="" id=""><option value="">선택</option></select></dd>
+      <dd class="full">
+        <ul class="tag_lst">
+          <li>
+            <span class="tag_group">이·통·반장<button type="button" class="btn_delete_s" onclick="">선택해제</button></span>
+          </li>
+          <li>
+            <span class="tag_group">재난도우미<button type="button" class="btn_delete_s" onclick="">선택해제</button></span>
+          </li>
+        </ul>
+      </dd>
+      <dt><label for="" class="required">지역</label></dt>
+      <dd class="full">
+        <select name="" id=""><option value="">시도</option></select>
+        <select name="" id=""><option value="">시군구</option></select>      
+        <select name="" id=""><option value="">읍면동</option></select>
+        <select name="" id=""><option value="">리</option></select>
+      </dd>
+      <dt><label for="" class="required">성명</label></dt>
+      <dd><input type="text"></dd>
+      <dt><label for="" class="required">모바일</label></dt>
+      <dd><input type="text"></dd>
+      <dt><label for="">전화번호</label></dt>
+      <dd><input type="text"></dd>
+      <dt><label for="">팩스</label></dt>
+      <dd><input type="text"></dd>
+      <dt><label for="">이메일</label></dt>
+      <dd><input type="text"></dd>
+      <dt><label for="">소속</label></dt>
+      <dd><input type="text"></dd>
+      <dt><label for="">직위</label></dt>
+      <dd><input type="text"></dd>
+      <dt><label for="">직급</label></dt>
+      <dd><input type="text"></dd>      
+      <dt><label for="">비고</label></dt>
+      <dd class="full"><textarea name="" id="" rows="2"></textarea></dd>
+      <dt><label for="">사용여부</label></dt>
+      <dd class="full">
+        <div class="switch_toggle">
+          <input type="checkbox" id="useYN1"><label class="useYN" for="useYN1">사용여부</label>
+        </div> 
+      </dd>
+    </dl>
+    <div class="p_foot">
+      <button type="button" class="btn_blue" onclick="">저장</button>
+      <button type="button" class="btn_gray" onclick="">취소</button>
+    </div>
+  </div>
+</dialog>
+<dialog id="pop_upload" class="pop_upload" style="--width:1185px" popover="manual" open>
+  <form method="dialog">
+    <header class="p_header tit">
+      <h1>주소록 엑셀 업로드</h1>
+      <button type="button" class="btn_cross">닫기</button>
+    </header>
+    <section class="p_body">
+      <dl class="dl_list">          
+        <dt><label for="" class="required">그룹</label></dt>
+        <dd><select name="" id=""><option value="">선택</option></select></dd>
+        <dd>
+          <ul class="tag_lst">
+            <li>
+              <span class="tag_group">이·통·반장<button type="button" class="btn_delete_s" onclick="">선택해제</button></span>
+            </li>
+            <li>
+              <span class="tag_group">재난도우미<button type="button" class="btn_delete_s" onclick="">선택해제</button></span>
+            </li>
+          </ul>
+        </dd>
+        <dt><label for="">파일</label></dt>
+        <dd>
+          <div class="file_ipt">
+            <input type="text" id="" name="" class="file_text" readonly="" role="filePath" title="첨부폴더 경로" placeholder="엑셀파일 첨부">              
+            <span class="file_wrap btn_skyblueline">파일선택</span>
+            <input type="file" role="fileAdd" class="file_add">
+          </div>
+          <button type="button" class="btn_grayline">미리보기</button>
+        </dd>         
+      </dl>
+      <div class="tbl_preview">
+        <div class="tbl_top">
+          <p>
+            전체 <span id="count_all">50</span>건 /
+            <b class="font_red">( 데이터 오류 <span id="count_R">3</span>건 발견 )</b>
+          </p>
+          <div class="tool check">
+            <strong class="label">대상지역</strong>
+            <select name="" id="" title="대상 시군구"><option value="">대상 시군구</option></select>
+            <select name="" id="" title="대상 읍면동"><option value="">대상 읍면동</option></select>
+            <p>( ※ 해당 지역 외 업로드는 불가능합니다. )</p>
+          </div>
+        </div>
+        <div class="tbl_wrap" style="--h:407px">
+          <table class="tbl_default">
+            <caption>업로드 미리보기</caption>     
+            <thead>           
+              <tr>
+                <th scope="col">유효성 검사</th>
+                <th scope="col">순번</th>
+                <th scope="col">성명</th>
+                <th scope="col">모바일번호</th>
+                <th scope="col">전화번호</th>
+                <th scope="col">팩스번호</th>
+                <th scope="col">이메일</th>
+                <th scope="col">소속</th>
+                <th scope="col">직위</th>
+                <th scope="col">직급</th>
+                <th scope="col">시군구</th>
+                <th scope="col">읍면동</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>            
+              <tr class="err">
+                <td>데이터 중복</td>
+                <td>2</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>            
+              <tr class="err">
+                <td>전화번호 형식오류</td>
+                <td>3</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>            
+              <tr class="err">
+                <td>대상지역 아님</td>
+                <td>4</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>   
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+              <tr>
+                <td>확인</td>
+                <td>1</td>
+                <td>홍길동</td>
+                <td>010-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>031-0000-0000</td>
+                <td>abcdefghijklmnop@hanmail.net</td>
+                <td>케이아이티밸리</td>
+                <td>연구원</td>
+                <td>담당자</td>
+                <td>청주시</td>
+                <td>쌍문동</td>
+              </tr>           
+            </tbody>
+          </table> 
+        </div>
+      </div>
+    </section>
+    <div class="p_foot">
+      <button type="button" class="btn_blue" onclick="">적용</button>
+      <button type="button" class="btn_gray" onclick="">취소</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- popup 비밀번호변경 -->
+<dialog id="pop_changePassword" class="pop_changePassword" style="--width:400px;">
+  <header class="p_header">
+    <h1>비밀번호 변경</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <p class="box_gray">
+      8~16자의 영문 대소문자, 숫자, 특수문자만 가능합니다.
+    </p>
+    <dl class="dl_list change_pw">
+      <dt><label for="" class="required">현재 비밀번호</label></dt>
+      <dd>
+        <input type="password" value="abcdefg"/>
+      </dd>
+      <dt><label for="common_pwd">새 비밀번호</label></dt>
+      <dd>
+        <input type="password" id="common_pwd" maxlength="16">
+      </dd>
+      <dt><label for="common_pwd2">확인</label></dt>
+      <dd>
+        <input type="password" id="common_pwd2" maxlength="16">
+      </dd>
+    </dl>
+    <div class="p_foot">
+      <button type="button" class="btn_blue">확인</button>
+      <button type="button" class="btn_gray">취소</button>
+    </div>
+  </div>
+</dialog>
+<!-- popup 비밀번호변경__e -->
+
+<!-- popup 내 정보-->
+<dialog id="pop_myInfo" class="pop_myInfo" style="--width:400px">
+  <header class="p_header">
+    <h1>내 정보</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <dl class="dl_list my_info">
+      <dt>ID</dt>
+      <dd id="common_user_id"><strong>admin</strong></dd>
+      <dt><label for="" class="required">비밀번호</label></dt>
+      <dd>
+        <input type="password" value="abcdefg"/><button type="button" class="btn_skyblue">변경</button>
+      </dd>
+      <dt><label for="common_org_nm" class="required">소속기관</label></dt>
+      <dd><input type="text" id="common_org_nm" maxlength="20"></dd>
+      <dt><label for="common_department_nm" class="required">부서</label></dt>
+      <dd><input type="text" id="common_department_nm" maxlength="20"></dd>
+      <dt><label for="common_rank_nm">직급</label></dt>
+      <dd><input type="text" id="common_rank_nm" maxlength="20"></dd>
+      <dt><label for="common_phone">연락처</label></dt>
+      <dd><input type="text" id="common_phone" maxlength="20"></dd>
+      <dt><label for="common_email">이메일</label></dt>
+      <dd><input type="text" id="common_email" maxlength="50"></dd>     
+      <dt><label for="common_auth">권한</label></dt>
+      <dd>
+        <select id="common_auth" disabled>
+          <option value="1">작성자</option><option value="2">승인자</option><option value="3">시스템운영자</option>
+        </select>
+      </dd>
+    </dl>
+    <div class="p_foot">
+      <button type="button" class="btn_deep">수정</button>
+      <button type="button" class="btn_gray">취소</button>
+    </div>
+  </div>
+</dialog>
+</div>
+<!-- popup 내 정보__e -->
+
+<!-- popup 알림 리스트 -->
+<dialog id="p_alert" class="p_alert" style="--width:970px">
+  <header class="p_header">
+    <h1>알림 리스트</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <div class="tbl_wrap">
+      <table class="tbl_default tbl_hover">
+        <caption>알림 리스트</caption>
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">재난상황</th>
+            <th scope="col">재난정보</th>
+            <th scope="col">발생지역</th>
+            <th scope="col">요청자</th>
+            <th scope="col">승인요청시각</th>
+          </tr>
+        </thead>
+        <tbody id="notice_list"><tr onclick="showDetail('KR.T10101-2024900167_HWA_1')" style="cursor:pointer;"><td>1</td><td><ul class="type_wrap"><li class="Actual"></li></ul></td><td>강풍 주의보</td><td>울산(중구 우정동)</td><td>관리자(재난상황실)</td><td>2024-09-26 15:05:16</td></tr><tr onclick="showDetail('KR.T10101-2024900166_HWA_1')" style="cursor:pointer;"><td>2</td><td><ul class="type_wrap"><li class="Actual"></li></ul></td><td>강풍 주의보</td><td>울산(북구)</td><td>관리자(재난상황실)</td><td>2024-09-26 14:40:37</td></tr></tbody>
+      </table>
+      <div id="pagination" class="paginate tui-pagination"></div>
+    </div>   
+  </div>
+</dialog>
+<!-- popup 알림 리스트__e -->
+
+<!-- popup 시스템 연계상태 -->
+<dialog id="p_stats" class="p_stats" style="--width:1000px;">
+  <header class="p_header">
+    <h1>시스템 연계상태</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <div class="tbl_wrap">
+      <table class="tbl_default">
+        <caption>시스템 연계상태</caption>        
+        <thead>
+          <tr>
+            <th scope="col">수신처명</th>
+            <th scope="col">ID</th>
+            <th scope="col">연계상태</th>
+            <th scope="col">IP</th>
+            <th scope="col">담당자</th>
+            <th scope="col">연락처</th>
+            <th scope="col">접속시각</th>
+            <th scope="col">접속해제시각</th>
+          </tr>
+        </thead>
+        <tbody id="common_connected"><tr><td>KBS 울산방송</td><td>kbs_uhd</td><td>정상</td><td>203.231.92.54</td><td>KBS 울산방송</td><td>010-0000-0000</td><td>2024-09-25 07:46:39</td><td>-</td></tr><tr><td>울산게이트웨이</td><td>us_gateway</td><td>정상</td><td>221.138.17.195</td><td>울산 예경보</td><td>010-0000-0000</td><td>2024-09-20 07:35:17</td><td>-</td></tr><tr class="on"><td>UHD 수신테스트</td><td>idsp</td><td>점검필요</td><td>122.199.200.232</td><td>테스트</td><td>010-0000-9050</td><td>2024-09-09 13:10:24</td><td>2024-09-09 16:44:42</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</dialog>
+<!-- popup 시스템 연계상태__e -->
+
+<script type="text/javascript">
+  init();
+  initSlideshow();
+</script>
+<script>
+  $('#addrLst').sortable({placeholder: "ui-state-highlight"});
+  $.editNewBox = function () {
+    const editIptWrap = $(this).parent('strong')
+    let editedIpt = $(this).val()
+    if (editedIpt === '') editedIpt = '새그룹 '
+    let btns = `<button type="button" class="btn_modify_s" title="수정" data-clickevt="modify">수정</button>
+                <button type="button" class="btn_del_s" title="삭제" data-clickevt="del">삭제</button>`
+    let html =`<label for=""><input type="checkbox">${editedIpt}</label>${btns}`;
+    $(editIptWrap).html(html).children('[type="text"]').remove()
+  }
+  // add item
+  const iptEvt = ipt => {
+    const value = ipt.val();
+    ipt.focus()   
+    if(value != '') ipt.val('');
+    ipt.val(value);//커서 맨뒤로 보내기
+    ipt.focusout($.editNewBox)
+    ipt.on('keydown', function (e) {
+      if (e.keyCode == 13) ipt.focusout()
+    })
+  }
+  const confirmBtn = `<button type="button" class="btn_grayline">확인</button>`;
+  $('[data-click="add_group"]').on('click', function () {
+    const target = $(this).parents('.panel_content').find('#addrLst');
+    const addLi = document.createElement('li');
+    const newBtn = `<button type="button">그룹 접기/열기</button>`;
+    let tmpl = `<strong><input type='text' placeholder='새그룹'>${confirmBtn}</strong>`;   
+    addLi.innerHTML = tmpl;
+    const ipt = target.append(addLi).find('[type="text"]')
+    iptEvt(ipt)
+  })
+  // delete,edit item
+  $('#addrLst').on('click', '[data-clickevt]', function (e) {
+    let btnType = e.target.dataset.clickevt;
+    console.log(btnType)
+    if (btnType == 'del') {
+      !confirm(
+          '선택한 그룹을 정말 삭제하시겠습니까? \n 해당 그룹에 속한 연락처는 어떻게 되나요??'
+      )
+        ? alert('취소 되었습니다.')
+        : $(this).parentsUntil('ul').remove();
+    } else if (btnType == 'modify') {
+      const target = $(this).parentsUntil('li')
+      const getTxt = target.find('label')
+          .contents()
+          .filter(function () {
+            return this.nodeType === 3 // Select only text nodes
+          })
+          .text()
+          .trim();
+      let editNewIpt = `<input type="text" value="${getTxt}" />${confirmBtn}`;
+      const editIpt = target.html(editNewIpt).find('input')
+      iptEvt(editIpt)
+    }
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+@@include('../../inc/top.html')
+<body>
+<div id="wrap">
+  @@include('../../inc/header.html')
+  <div class="con_wrap">
+    @@include('../../inc/warning/lnb.html')
+    <main class="contents">
+      <header class="tit">
+        <h1>문안관리</h1>
+      </header>
+      <div class="content tmpl">
+        <div class="tab box_tab">
+          <ul class="tab_list">
+            <li><a href="#tab01" class="on">표준문안관리</a></li>
+            <li><a href="#tab02">메시지함 관리</a></li>
+          </ul>
+        </div>
+        <div class="tab_conts">
+          <div id="tab01" class="tab_cont layout_flex std_tmpl">            
+            <div class="layout_flex vertical">
+              <section>
+                <div class="search_area">
+                  <ul class="search">
+                    <li>
+                      <select title="대분류" id="code1" onchange="setCode2()"><option value="">전체</option><option value="T1">자연재난</option><option value="T2">사회재난</option><option value="T3">기타재난</option></select>
+                      <select title="중분류" id="code2" onchange="search()"><option value="">전체</option></select>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tbl_area">
+                  <div class="tbl_top">
+                    <p>검색결과 : 총 <b class="font_blue" id="result_count">163</b>건</p>                      
+                  </div>
+                  <div class="tbl_wrap" style="--h:156px">
+                    <table class="tbl_default tbl_hover">
+                      <caption>표준문안관리 검색 결과 제목</caption>          
+                      <thead>
+                        <tr>
+                          <th scope="col">대분류</th>
+                          <th scope="col">중분류</th>
+                          <th scope="col">재난코드</th>
+                          <th scope="col">재난명</th>
+                          <th scope="col">우선순위</th>
+                          <th scope="col">사용여부</th>
+                        </tr>
+                      </thead>                    
+                      <tbody id="table_list"><tr class="on" onclick="selectRow(this, 'HWA')"><td>자연재난</td><td>강풍</td><td>HWA</td><td>강풍 주의보</td><td>2</td><td>Y</td></tr><tr onclick="selectRow(this, 'HWG')"><td>자연재난</td><td>강풍</td><td>HWG</td><td>강풍 주의보 변경</td><td>2</td><td>Y</td></tr><tr onclick="selectRow(this, 'HWL')"><td>자연재난</td><td>강풍</td><td>HWL</td><td>강풍 주의보 해제</td><td>1</td><td>Y</td></tr><tr onclick="selectRow(this, 'HWW')"><td>자연재난</td><td>강풍</td><td>HWW</td><td>강풍 경보</td><td>3</td><td>Y</td></tr><tr onclick="selectRow(this, 'HWN')"><td>자연재난</td><td>강풍</td><td>HWN</td><td>강풍 경보 변경</td><td>3</td><td>Y</td></tr><tr onclick="selectRow(this, 'HWC')"><td>자연재난</td><td>강풍</td><td>HWC</td><td>강풍 경보 해제</td><td>1</td><td>Y</td></tr></tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+              <div class="linked_down layout_flex vertical">
+                <section>                  
+                  <dl class="dl_list">
+                    <dt>재난유형</dt>
+                    <dd><strong>자연재난 > 호우 > 경보</strong></dd>
+                    <dt>사용여부</dt>
+                    <dd>
+                      <div class="switch_toggle">
+                        <input type="checkbox" id="useYN1"><label class="useYN" for="useYN1">사용여부</label>
+                      </div> 
+                    </dd>
+                    <dt><label for="">제목</label></dt>
+                    <dd><input type="text"></dd>
+                    <dt>발령매체</dt>
+                    <dd>
+                      <ul id="media_select" class="check_group">
+                        <li><label for="media_I-C-BC1.0"><input type="checkbox" name="media" value="I-C-BC1.0" id="media_I-C-BC1.0">재난방송(UHD)</label></li>
+                        <li><label for="media_BIS"><input type="checkbox" name="deviceType" value="BIS" id="media_BIS">버스정보시스템</label></li>
+                        <li><label for="media_CDB"><input type="checkbox" name="deviceType" value="CDB" id="media_CDB">재해문자전광판(행정안전부)</label></li>
+                        <li><label for="media_LDB"><input type="checkbox" name="deviceType" value="LDB" id="media_LDB">재해문자전광판(지자체)</label></li>
+                        <li><label for="media_VBS"><input type="checkbox" name="deviceType" value="VBS" id="media_VBS">마을방송시스템</label></li>
+                        <li><label for="media_VNS"><input type="checkbox" name="deviceType" value="VNS" id="media_VNS">자동음성통보시스템</label></li>
+                      </ul>
+                    </dd>
+                  </dl>
+                </section>
+                <section id="tabs" class="tab_wrap">
+                  <ul>
+                    <li><a href="#tabs-1">한국어</a></li>
+                    <li><a href="#tabs-2">영어</a></li>
+                  </ul>
+                  <div id="tabs-1">
+                    @@include('../../inc/warning/msg_lst.html')
+                  </div>                        
+                </section>
+              </div>              
+              <div class="btn_wrap">
+                <button type="button" class="btn_blue" onclick="saveTemplate()">저장</button>
+                <button type="button" class="btn_deep">삭제</button>
+                <button type="button" class="btn_gray">취소</button>
+              </div>
+            </div>
+            <section class="tbl_area reserved_word">
+              <header class="tit">
+                <h2>예약어</h2>
+                <div class="tool">
+                  <input type="text" placeholder="검색어">
+                  <button type="button" class="btn_skyblue" onclick="search();">검색</button>
+                </div>
+              </header>
+              <div class="tbl_wrap">
+                <table class="tbl_default">
+                <caption>예약어</caption>               
+                <thead>
+                  <tr>
+                    <th scope="col">예약어</th>
+                    <th scope="col">설명</th>
+                  </tr>
+                </thead>             
+                  <tbody id="table_cvnnt"><tr><td>@AREADESC.en-US@</td><td>(영어)재난발생지역명 전체</td></tr><tr><td>@AREADESC.ja@</td><td>(일본어)재난발생지역명 전체</td></tr><tr><td>@AREADESC.ko-KR@</td><td>(한글)재난발생지역명 전체</td></tr><tr><td>@AREADESC.vn@</td><td>(베트남어)재난발생지역명 전체</td></tr><tr><td>@AREADESC.zh-chs@</td><td>(중국어)재난발생지역명 전체</td></tr><tr><td>@AREASI.en-US@</td><td>(영어)재난발생지역 간략히 표시(경북 포항시)</td></tr><tr><td>@AREASI.ja@</td><td>(일본어)재난발생지역 간략히 표시(경북 포항시)</td></tr><tr><td>@AREASI.ko-KR@</td><td>(한글)재난발생지역 간략히 표시(경북 포항시)</td></tr><tr><td>@AREASI.vn@</td><td>(베트남어)재난발생지역 간략히 표시(경북 포항시)</td></tr><tr><td>@AREASI.zh-chs@</td><td>(중국어)재난발생지역 간략히 표시(경북 포항시)</td></tr><tr><td>@ETA@</td><td>재난발생시각 : YYYY년 MM월 DD일 HH시 MI분</td></tr><tr><td>@ETB@</td><td>재난발생시각 : YYYY-MM-DD HH:MI:SS</td></tr><tr><td>@ETDD@</td><td>재난발생시각 : 일(추가)</td></tr><tr><td>@ETHH@</td><td>재난발생시각 : 시</td></tr><tr><td>@ETMI@</td><td>재난발생시각 : 분</td></tr><tr><td>@ETMM@</td><td>재난발생시각 : 월(추가)</td></tr><tr><td>@MAGNITUDE@</td><td>지진규모</td></tr><tr><td>@SENDERNAME@</td><td>발령기관명</td></tr><tr><td>@SOURCE.en-US@</td><td>(영어)관리기관명</td></tr><tr><td>@SOURCE.ja@</td><td>(일본어)관리기관명</td></tr><tr><td>@SOURCE.ko-KR@</td><td>관리기관명</td></tr><tr><td>@SOURCE.vn@</td><td>(베트남어)관리기관명</td></tr><tr><td>@SOURCE.zh-chs@</td><td>(중국어)관리기관명</td></tr></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+          <div id="tab02" class="tab_cont std_msg">
+            <div class="layout_flex">
+              <section class="tbl_area">
+                <div class="search_area">
+                  <!-- 메시지 구분은 공통코드 추가 -->
+                  <ul class="search">
+                    <li>
+                      <select name="" id="" title="메시지 구분">
+                        <option value="">문자</option>
+                        <option value="">단말기</option>
+                        <option value="">음성 등..?</option>
+                      </select>
+                    </li>
+                    <li><input type="text" title="제목" placeholder="제목" /></li>
+                  </ul>
+                  <div class="tool">
+                    <button type="button" class="btn_skyblue" onclick="document.querySelector('#pop_addMsg').showModal();">추가</button>
+                  </div>
+                </div>
+                <div class="tbl_wrap">
+                  <table class="tbl_default tbl_hover">
+                    <caption>메시지함</caption>                
+                    <thead>
+                      <tr>                        
+                        <th scope="col">메시지 구분</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">재난유형</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">작성일</th>
+                      </tr>
+                    </thead>             
+                    <tbody>
+                      <tr>
+                        <td>문자</td>
+                        <td>장비 시험 방송 1</td>
+                        <td>자연재난 > 호우 > 호우경보</td>
+                        <td>admin</td>
+                        <td>2024-01-22</td>
+                      </tr>
+                      <tr>
+                        <td>단말기</td>
+                        <td>장비 시험 방송 1</td>
+                        <td>자연재난 > 호우 > 호우경보해제</td>
+                        <td>admin</td>
+                        <td>2024-01-22</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <section class="linked_right">
+                <div class="flex_vertical">                  
+                  <dl class="dl_list">
+                    <dt><label for="type">메시지 구분</label></dt>
+                    <dd>
+                       <select name="" id="" title="메시지 구분">
+                        <option value="">문자</option>
+                        <option value="">단말기</option>
+                        <option value="">음성 등..?</option>
+                      </select>
+                    </dd>
+                    <dt><label for="type">재난유형</label></dt>
+                    <dd class="code_wrap">
+                      <select title="대분류" id="code1" onchange="setCode2()"><option value="">전체</option><option value="T1">자연재난</option><option value="T2">사회재난</option><option value="T3">기타재난</option></select>
+                      <select title="중분류" id="code2" onchange="setCode3()"><option value="">전체</option></select>
+                      <select title="소분류" id="code3" onchange="setTitle()"><option value="">선택</option></select>
+                    </dd>
+                    <dt><label for="type">제목</label></dt>
+                    <dd><input type="text" placeholder="제목"></dd>
+                  </dl>                  
+                  <div id="tabs" class="tab_wrap">
+                    <ul>
+                      <li><a href="#tabs-1">한국어</a></li>
+                      <li><a href="#tabs-2">영어</a></li>
+                    </ul>
+                    <div id="tabs-1">
+                      @@include('../../inc/warning/msg_lst.html')
+                    </div>              
+                    <div id="tabs-2">                      
+                    </div>          
+                  </div>
+                  <div class="btn_wrap">
+                    <button type="button" class="btn_blue">저장</button>
+                    <button type="button" class="btn_deep">수정</button>
+                    <button type="button" class="btn_gray">삭제</button>
+                    <button type="button" class="btn_gray">취소</button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<dialog id="pop_addMsg" class="pop_addMsg" style="--width:500px;--top:30vh">
+  <header class="p_header">
+    <h1>메시지 추가</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <dl class="dl_list">    
+      <dt><label for="">메시지 구분</label></dt>
+      <dd>
+         <select name="" id="" title="메시지 구분">
+            <option value="">문자</option>
+            <option value="">단말기</option>
+            <option value="">음성 등..?</option>
+          </select>
+      </dd>
+      <dt><label for="">제목</label></dt>
+      <dd><input type="text" id="" placeholder="제목"></dd>
+    </dl>
+  </div>
+  <div class="p_foot">
+    <button type="button" class="btn_blue" onclick="">확인</button>
+  </div>
+</dialog>
+@@include('../../inc/script.html')
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,98 @@
+<dialog id="pop_addrBook" class="pop_addrBook" style="--width:1100px">
+  <div class="p_header">
+    <h1>주소록</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </div>
+  <div class="p_body">
+    <div class="layout_flex">
+      <div class="lst_wrap">      
+        <div class="lst_status all_lst_ctrl">
+          <label for="all" class="all"><input type="checkbox" id="all">전체선택</label>            
+        </div>
+        <ul  id="addrLst" class="check_lst lst_ctrl">
+          <li>
+            <strong>
+              <label for="dong1"><input type="checkbox">이·통·반장</label>
+            </strong>
+          </li>
+          <li>
+            <strong>
+              <label for=""><input type="checkbox">재난도우미</label>
+            </strong>
+          </li>
+          <li>
+            <strong>
+              <label for=""><input type="checkbox">노인도우미</label>
+            </strong>
+          </li>
+        </ul>
+      </div>
+      <div class="tbl_area">                
+        <div class="tbl_top">
+          <p>
+            전체 <span id="count_all">556</span>건 /
+            <b class="font_blue">(<span id="count_R">0</span>개 선택됨)</b>
+          </p>            
+          <div class="tool">
+            <ul class="search">
+              <li>
+                <select title="시도" id="">
+                  <option value="">시도</option>
+                </select>
+              </li>                              
+              <li>
+                <select title="시군구" id="">
+                  <option value="">시군구</option>
+                </select>
+              </li>
+              <li>
+                <select title="읍면동" id="">
+                  <option value="">읍면동</option>
+                </select>
+              </li>
+              <li>                
+                <input type="text" title="검색어" placeholder="성명 or 모바일번호" id="">
+                <button type="button" class="btn_skyblue" onclick="search();">검색</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="tbl_wrap">
+          <table class="tbl_default">
+            <thead>
+              <tr>
+                <th scope="col"><input type="checkbox" title="전체선택" class="all_check row_check"></th>
+                <th scope="col">번호</th>
+                <th scope="col">그룹</th>
+                <th scope="col">성명</th>
+                <th scope="col">모바일</th>
+                <th scope="col">지역</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox" title="줄선택" class="row_check"></td>
+                <td>1</td>
+                <td><span class="tag_group">2023년 재난도우미</span></td>
+                <td>고길동</td>
+                <td>010-1234-5678</td>
+                <td>서울시 도봉구 쌍문동</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" title="줄선택" class="row_check"></td>
+                <td>2</td>
+                <td><span class="tag_group">이·통·반장</span><span class="tag_group">재난도우미</span><span class="tag_group">노인도우미</span></td>
+                <td>둘리</td>
+                <td>010-1234-5678</td>
+                <td>경기도 부천시 원미구 상1동</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="p_foot">
+      <button type="button" class="btn_blue" onclick="_popReferFn.apply()">발송대상 단말기 목록으로 추가</button>
+    </div>
+  </div>
+</dialog>

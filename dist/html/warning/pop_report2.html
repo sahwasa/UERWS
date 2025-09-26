@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>강원도 - 재난 상황전파 핫라인 전송시스템</title>
+  <link rel="stylesheet" type="text/css" href="../plugins/axicon/axicon.min.css" />
+  <link rel="stylesheet" type="text/css" href="../plugins/jquery-ui/themes/base/jquery-ui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+  <link rel="stylesheet" type="text/css" href="../css/sub.css" />
+  <link rel="stylesheet" type="text/css" href="../css/pop.css" />
+  <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
+
+  <script src="../plugins/jquery/jquery.js" charset="utf-8"></script>
+  <script src="../plugins/jquery-ui/jquery-ui.min.js" charset="utf-8"></script>
+  <script src="../plugins/jquery-mousewheel/jquery.mousewheel.min.js" charset="utf-8"></script>
+  <script src="../js/common.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+
+<div id="wrap">
+  <header id="header">
+  <h1 class="main_logo">
+    <a href="/main.do">
+      <!-- <img src="../../images/logo.png" alt="정부로고">지자체 재난 예경보 통합플랫폼 -->
+      <!-- <img src="../../images/3100000000.png" alt="울산시로고">울산시 재난 예경보 통합플랫폼 -->
+      <!-- <img src="../../images/4311000000.png" alt="청주시로고">청주시 재난 예경보 통합플랫폼 -->
+      <!-- <img src="../../images/4278000000.png" alt="철원군로고">철원군 재난 예경보 통합플랫폼 -->
+      <img src="../../images/logo/5280000000.png" alt="철원군로고">철원군 재난 예경보 통합플랫폼</a>
+  </h1>  
+  <div class="util_wrap">
+    <ul class="util_lst">
+      <li>
+        <button type="button" class="btn user" onclick="document.querySelector('#pop_myInfo').show()">내정보 보기 및 수정</button>
+        <span><b id="top_user_nm">김관리</b>님</span>
+      </li>
+      <li><a href="../../html/admin/user.html" class="btn set" title="시스템관리">시스템관리</a></li>
+      <li class="alert_wrap" title="재난발령요청">
+        <a href="javascript:(document.querySelector('#p_alert').show())" class="btn alert">재난발령요청</a>
+        <span class="on" id="alert_counter">0</span>
+      </li>      
+      <li class="alert_wrap" onclick="open_accdent_popup()" title="돌발상황">
+        <a href="#" class="btn unexpected">돌발상황</a>
+        <span class="on" id='accident_counter'>2</span>
+      </li>
+      <li title="연계상태"><a href="javascript:(document.querySelector('#p_stats').show())" class="system">연계상태</a></li>
+      <li title="로그아웃"><a href="login.html" class="btn log">로그아웃</a></li>
+    </ul>
+      <!-- <div class="system_wrap" style="cursor:pointer;">
+        <span class="system">시스템</span>
+      </div> -->
+  </div>
+</header>
+
+  <div id="container">
+  
+
+    <!-- contents -->
+    <div class="contents">
+      <div class="tit">
+        <h1 class="axi axi-menu"><i></i>발송내역<span>통보문</span></h1>
+        <div class="locate">
+          <ul>
+            <li><a href="#"><i class="axi axi-ion-home" title="home"></i></a></li>
+            <li><a href="#">통보문</a></li>
+            <li>발송내역</li>
+          </ul>
+        </div>
+      </div>
+      <div class="body">
+
+        <div class="search">
+          <label for="">기간</label>
+          <input type="text" id="" placeholder="YYYY/MM /DD" readonly class="date" dataformat="from" required /> ~
+          <input type="text" id="" placeholder="YYYY/MM /DD" readonly class="date" dataformat="to" required />
+          <label for="">재해구분</label>
+          <select class="" name="">
+            <option value="">자연재해</option>
+          </select>
+          <select class="" name="">
+            <option value="">태풍</option>
+          </select>
+          <label for="">검색어</label>
+          <select name="" id="">
+            <option value="">요청자</option>
+            <option value="">승인자</option>
+            <option value="">통보제목</option>
+          </select>
+          <input type="text" />
+          <a href="#" class="btn btn_skyblue">조회</a>
+        </div>
+
+        <div class="article">
+          <div class="section fl" style="width:68%;">
+            <div class="tit">
+              <h2 class="axi axi-flickr">발송내역 목록</h2>
+              <span>
+                <a href="" class="btn_ico btn_excel">엑셀저장</a>
+              </span>
+            </div>
+            <div class="body">
+              <table class="tbl_default">
+                <thead>
+                  <tr>
+                    <th id="tbl_h01" width="80">재난구분</th>
+                    <th id="tbl_h02" width="80">재난상세</th>
+                    <th id="tbl_h03">통보제목</th>
+                    <th id="tbl_h04" width="150">요청</th>
+                    <th id="tbl_h06" width="150">승인</th>
+                    <th id="tbl_h08" width="60">방송조치</th>
+                    <th id="tbl_h09" width="41">보기</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="scroll" style="height:640px;">
+                <table class="tbl_default tbl_hover">
+                  <tbody>
+                    <tr>
+                      <td headers="tbl_h01" width="80">자연재난</td>
+                      <td headers="tbl_h02" width="80">태풍</td>
+                      <td headers="tbl_h03" class="alignL">태풍으로 인한 위험</td>
+                      <td headers="tbl_h04" width="150">홍길동 (2018/08/03 08:30)</td>
+                      <td headers="tbl_h06" width="150">김승인 (2018/08/30 08:32)</td>
+                      <td headers="tbl_h08" width="60"><a href="" class="tbl_ico tbl_report">방송조치</a></td>
+                      <td headers="tbl_h09" width="25"><a href="" class="tbl_ico tbl_report">통보문 미리보기</a></td>
+                    </tr>
+                    <tr>
+                      <td headers="tbl_h01" width="80">자연재난</td>
+                      <td headers="tbl_h02" width="80">태풍</td>
+                      <td headers="tbl_h03" class="alignL">태풍으로 인한 위험</td>
+                      <td headers="tbl_h04" width="150">홍길동 (2018/08/03 08:30)</td>
+                      <td headers="tbl_h06" width="150">김승인 (2018/08/30 08:32)</td>
+                      <td headers="tbl_h08" width="60"><a href="" class="tbl_ico tbl_report">방송조치</a></td>
+                      <td headers="tbl_h09" width="25"><a href="" class="tbl_ico tbl_report">통보문 미리보기</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="section fr tab_wrap sub_section" style="width:30%;">
+            <ul class="tab_s">
+              <li><a href="#tab01">문자</a></li>
+              <li><a href="#tab02">FAX</a></li>
+              <li><a href="#tab03">PC통보</a></li>
+            </ul>
+            <div id="tab01" class="tab_s_contents article">
+              <table class="tbl_default">
+                <thead>
+                  <tr>
+                    <th id="tbl_s_h01" width="25">번호</th>
+                    <th id="tbl_s_h02" width="70">부서</th>
+                    <th id="tbl_s_h03" width="60">이름</th>
+                    <th id="tbl_s_h04">수신시각</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="scroll" style="height:600px;">
+                <table class="tbl_default">
+                  <tbody>
+                    <tr>
+                      <td headers="tbl_s_h01" width="25">1</td>
+                      <td headers="tbl_s_h02" width="70">강원도청</td>
+                      <td headers="tbl_s_h03" width="60">홍길동</td>
+                      <td headers="tbl_s_h04">2018/08/30 08:30</td>
+                    </tr>
+                    <tr>
+                      <td headers="tbl_s_h01">2</td>
+                      <td headers="tbl_s_h02">강원도청</td>
+                      <td headers="tbl_s_h03">홍길동</td>
+                      <td headers="tbl_s_h04">2018/08/30 08:30</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="tab02" class="tab_s_contents article">
+              <table class="tbl_default">
+                <thead>
+                  <tr>
+                    <th id="tbl_s_h11" width="25">번호</th>
+                    <th id="tbl_s_h12" width="70">부서</th>
+                    <th id="tbl_s_h13" width="60">이름</th>
+                    <th id="tbl_s_h14">수신시각</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="scroll" style="height:600px;">
+                <table class="tbl_default">
+                  <tbody>
+                    <tr>
+                      <td headers="tbl_s_h11" width="25">1</td>
+                      <td headers="tbl_s_h12" width="70">강원도청</td>
+                      <td headers="tbl_s_h13" width="60">홍길동</td>
+                      <td headers="tbl_s_h14">2018/08/30 08:30</td>
+                    </tr>
+                    <tr>
+                      <td headers="tbl_s_h11">2</td>
+                      <td headers="tbl_s_h12">강원도청</td>
+                      <td headers="tbl_s_h13">홍길동</td>
+                      <td headers="tbl_s_h14">2018/08/30 08:30</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="tab03" class="tab_s_contents article">
+              <table class="tbl_default">
+                <thead>
+                  <tr>
+                    <th id="tbl_s_h21" width="25">번호</th>
+                    <th id="tbl_s_h22" width="70">소속기관</th>
+                    <th id="tbl_s_h23" width="70">부서</th>
+                    <th id="tbl_s_h24" width="60">담당자</th>
+                    <th id="tbl_s_h25" width="60">ID</th>
+                    <th id="tbl_s_h26">방송시작</th>
+                  </tr>
+                </thead>
+              </table>
+              <div class="scroll" style="height:600px;">
+                <table class="tbl_default">
+                  <tbody>
+                    <tr>
+                      <td headers="tbl_s_h21" width="25">1</td>
+                      <td headers="tbl_s_h22" width="70">강원도청</td>
+                      <td headers="tbl_s_h23" width="60">홍길동</td>
+                      <td headers="tbl_s_h24">2018/08/30 08:30</td>
+                    </tr>
+                    <tr>
+                      <td headers="tbl_s_h21">2</td>
+                      <td headers="tbl_s_h22">강원도청</td>
+                      <td headers="tbl_s_h23">홍길동</td>
+                      <td headers="tbl_s_h24">2018/08/30 08:30</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- contents__e -->
+  </div>
+
+</div>
+</body>
+</html>
+<script type="text/javascript">
+  $(function(){
+    init();
+  })
+</script>

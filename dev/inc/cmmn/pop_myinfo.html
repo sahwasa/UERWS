@@ -1,0 +1,129 @@
+
+<!-- popup 비밀번호변경 -->
+<dialog id="pop_changePassword" class="pop_changePassword" style="--width:400px;">
+  <header class="p_header">
+    <h1>비밀번호 변경</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <p class="box_gray">
+      8~16자의 영문 대소문자, 숫자, 특수문자만 가능합니다.
+    </p>
+    <dl class="dl_list change_pw">
+      <dt><label for="" class="required">현재 비밀번호</label></dt>
+      <dd>
+        <input type="password" value="abcdefg"/>
+      </dd>
+      <dt><label for="common_pwd">새 비밀번호</label></dt>
+      <dd>
+        <input type="password" id="common_pwd" maxlength="16">
+      </dd>
+      <dt><label for="common_pwd2">확인</label></dt>
+      <dd>
+        <input type="password" id="common_pwd2" maxlength="16">
+      </dd>
+    </dl>
+    <div class="p_foot">
+      <button type="button" class="btn_blue">확인</button>
+      <button type="button" class="btn_gray">취소</button>
+    </div>
+  </div>
+</dialog>
+<!-- popup 비밀번호변경__e -->
+
+<!-- popup 내 정보-->
+<dialog id="pop_myInfo" class="pop_myInfo" style="--width:400px">
+  <header class="p_header">
+    <h1>내 정보</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <dl class="dl_list my_info">
+      <dt>ID</dt>
+      <dd id="common_user_id"><strong>admin</strong></dd>
+      <dt><label for="" class="required">비밀번호</label></dt>
+      <dd>
+        <input type="password" value="abcdefg"/><button type="button" class="btn_skyblue">변경</button>
+      </dd>
+      <dt><label for="common_org_nm" class="required">소속기관</label></dt>
+      <dd><input type="text" id="common_org_nm" maxlength="20"></dd>
+      <dt><label for="common_department_nm" class="required">부서</label></dt>
+      <dd><input type="text" id="common_department_nm" maxlength="20"></dd>
+      <dt><label for="common_rank_nm">직급</label></dt>
+      <dd><input type="text" id="common_rank_nm" maxlength="20"></dd>
+      <dt><label for="common_phone">연락처</label></dt>
+      <dd><input type="text" id="common_phone" maxlength="20"></dd>
+      <dt><label for="common_email">이메일</label></dt>
+      <dd><input type="text" id="common_email" maxlength="50"></dd>     
+      <dt><label for="common_auth">권한</label></dt>
+      <dd>
+        <select id="common_auth" disabled>
+          <option value="1">작성자</option><option value="2">승인자</option><option value="3">시스템운영자</option>
+        </select>
+      </dd>
+    </dl>
+    <div class="p_foot">
+      <button type="button" class="btn_deep">수정</button>
+      <button type="button" class="btn_gray">취소</button>
+    </div>
+  </div>
+</dialog>
+</div>
+<!-- popup 내 정보__e -->
+
+<!-- popup 알림 리스트 -->
+<dialog id="p_alert" class="p_alert" style="--width:970px">
+  <header class="p_header">
+    <h1>알림 리스트</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <div class="tbl_wrap">
+      <table class="tbl_default tbl_hover">
+        <caption>알림 리스트</caption>
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">재난상황</th>
+            <th scope="col">재난정보</th>
+            <th scope="col">발생지역</th>
+            <th scope="col">요청자</th>
+            <th scope="col">승인요청시각</th>
+          </tr>
+        </thead>
+        <tbody id="notice_list"><tr onclick="showDetail('KR.T10101-2024900167_HWA_1')" style="cursor:pointer;"><td>1</td><td><ul class="type_wrap"><li class="Actual"></li></ul></td><td>강풍 주의보</td><td>울산(중구 우정동)</td><td>관리자(재난상황실)</td><td>2024-09-26 15:05:16</td></tr><tr onclick="showDetail('KR.T10101-2024900166_HWA_1')" style="cursor:pointer;"><td>2</td><td><ul class="type_wrap"><li class="Actual"></li></ul></td><td>강풍 주의보</td><td>울산(북구)</td><td>관리자(재난상황실)</td><td>2024-09-26 14:40:37</td></tr></tbody>
+      </table>
+      <div id="pagination" class="paginate tui-pagination"></div>
+    </div>   
+  </div>
+</dialog>
+<!-- popup 알림 리스트__e -->
+
+<!-- popup 시스템 연계상태 -->
+<dialog id="p_stats" class="p_stats" style="--width:1000px;">
+  <header class="p_header">
+    <h1>시스템 연계상태</h1>
+    <button type="button" class="btn_cross">닫기</button>
+  </header>
+  <div class="p_body">
+    <div class="tbl_wrap">
+      <table class="tbl_default">
+        <caption>시스템 연계상태</caption>        
+        <thead>
+          <tr>
+            <th scope="col">수신처명</th>
+            <th scope="col">ID</th>
+            <th scope="col">연계상태</th>
+            <th scope="col">IP</th>
+            <th scope="col">담당자</th>
+            <th scope="col">연락처</th>
+            <th scope="col">접속시각</th>
+            <th scope="col">접속해제시각</th>
+          </tr>
+        </thead>
+        <tbody id="common_connected"><tr><td>KBS 울산방송</td><td>kbs_uhd</td><td>정상</td><td>203.231.92.54</td><td>KBS 울산방송</td><td>010-0000-0000</td><td>2024-09-25 07:46:39</td><td>-</td></tr><tr><td>울산게이트웨이</td><td>us_gateway</td><td>정상</td><td>221.138.17.195</td><td>울산 예경보</td><td>010-0000-0000</td><td>2024-09-20 07:35:17</td><td>-</td></tr><tr class="on"><td>UHD 수신테스트</td><td>idsp</td><td>점검필요</td><td>122.199.200.232</td><td>테스트</td><td>010-0000-9050</td><td>2024-09-09 13:10:24</td><td>2024-09-09 16:44:42</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</dialog>
+<!-- popup 시스템 연계상태__e -->
