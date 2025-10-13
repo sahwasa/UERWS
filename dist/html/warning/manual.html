@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../../font/fontello/css/fontello.css">
   <link rel="stylesheet" href="../../css/cmmn.css">
   <link rel="stylesheet" href="../../css/warning.css">
-  <link rel="stylesheet" href="../../css/tui-pagination.css">
+  <!-- <link rel="stylesheet" href="../../css/tui-pagination.css"> -->
   <script src="../../plugins/jquery/dist/jquery.min.js"></script>
   <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
   <script src="../../plugins/jquery-ui/ui/i18n/datepicker-ko.js"></script>
@@ -20,7 +20,7 @@
   <script src="../../plugins/jqueryui-timepicker-addon/dist/jquery.datetimepicker.full.min.js"></script>
   <!-- <script src="../../plugins/jqueryui-timepicker-addon/dist/i18n/jquery-ui-timepicker-ko.js"></script> -->
   <script src="../../plugins/echarts/dist/echarts.min.js"></script>
-  <!-- <script src="../../js/tui-pagination.js"></script> -->
+  <script src="../../js/tui-pagination.js"></script>
   <script src="../../js/common.js"></script>
   <script src="../../js/ui_common.js"></script>
 
@@ -36,7 +36,7 @@
       <!-- <img src="../../images/3100000000.png" alt="울산시로고">울산시 재난 예경보 통합플랫폼 -->
       <!-- <img src="../../images/4311000000.png" alt="청주시로고">청주시 재난 예경보 통합플랫폼 -->
       <!-- <img src="../../images/4278000000.png" alt="철원군로고">철원군 재난 예경보 통합플랫폼 -->
-      <img src="../../images/logo/5280000000.png" alt="철원군로고">철원군 재난 예경보 통합플랫폼</a>
+      <img src="../../images/logo/5280000000.png" alt="철원군로고">도시 극한호우 예경보</a>
   </h1>  
   <div class="util_wrap">
     <ul class="util_lst">
@@ -175,53 +175,59 @@
                 </span>
               </dd>
             </dl>
-            <div class="opt_area">
-              <header class="tit">
-                <h2>재해문자전광판 추가옵션</h2>                
-              </header>
-              <dl class="dl_list">
-                <dt><label for="">표시효과</label></dt>
-                <dd>
-                  <ul>
-                    <li>
-                      <select name="" id="" class="ipt_full"><option value="">아래에서부터 위로 서서히 올라가며 점점 빨라지며 바운스됨ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ</option></select>
-                    </li>
-                    <li>
-                      <label for="">속도
-                        <select name="" id="">
-                          <option value="">1(빠름)</option>
-                          <option value="">8(느림)</option>
-                        </select>                        
-                      </label>
-                      <label for="">표시 유지시간
-                        <select name="" id=""><option value=""></option></select> 초                  
-                      </label>
-                    </li>
-                  </ul>
-                <dt><label for="">완료효과</label></dt>
-                <dd>
-                  <ul>
-                    <li>
-                      <select name="" id="" class="ipt_full"><option value="">아래에서부터 위로 서서히 올라감</option></select>
-                    </li>
-                    <li>
-                      <label for="">속도
-                        <select name="" id="">
-                          <option value="">1(빠름)</option>
-                          <option value="">8(느림)</option>
-                        </select>                        
-                      </label>                     
-                    </li>
-                  </ul>
-                </dd>                
-                <dt><label for="">싸이렌 출력</label></dt>
-                <dd>
-                  <div class="switch_toggle">
-                    <input type="checkbox" id="useYN1"><label class="useYN" for="useYN1">사용여부</label>
-                  </div>
-                </dd>
-              </dl>
-            </div>              
+            <div class="opt_area">              
+              <section class="opt_wrap">
+                <header class="tit">
+                  <h2>재해문자전광판 추가옵션</h2>                
+                </header>
+                <dl class="dl_list">
+                  <dt><label for="">표시효과</label></dt>
+                  <dd>
+                    <ul>
+                      <li>
+                        <select name="" id="" class="ipt_full"><option value="">아래에서부터 위로 서서히 올라가며 점점 빨라지며 바운스됨ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ</option></select>
+                      </li>
+                      <li>
+                        <label for="">속도
+                          <select name="" id="">
+                            <option value="">1(빠름)</option>
+                            <option value="">8(느림)</option>
+                          </select>                        
+                        </label>
+                        <label for="">표시 유지시간
+                          <select name="" id=""><option value=""></option></select> 초                  
+                        </label>
+                      </li>
+                    </ul>
+                  </dd><dt><label for="">완료효과</label></dt>
+                  <dd>
+                    <ul>
+                      <li>
+                        <select name="" id="" class="ipt_full"><option value="">아래에서부터 위로 서서히 올라감</option></select>
+                      </li>
+                      <li>
+                        <label for="">속도
+                          <select name="" id="">
+                            <option value="">1(빠름)</option>
+                            <option value="">8(느림)</option>
+                          </select>                        
+                        </label>                     
+                      </li>
+                    </ul>
+                  </dd>                
+                  <dt><label for="">싸이렌 출력</label></dt>
+                  <dd>
+                    <div class="switch_toggle">
+                      <input type="checkbox" id="useYN1"><label class="useYN" for="useYN1">사용여부</label>
+                    </div>
+                  </dd>
+                </dl>
+              </section>
+              <span class="btn_switch_single">
+                <input type="checkbox" id="add_opt">
+                <label for="add_opt" class="btn_opt" data-on="+ 추가옵션 사용하기" data-off="- 추가옵션 사용안함">추가옵션 사용여부</label>
+              </span>
+            </div>             
           </div>
         </section>
         <section class="panel">

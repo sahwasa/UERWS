@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../../font/fontello/css/fontello.css">
   <link rel="stylesheet" href="../../css/cmmn.css">
   <link rel="stylesheet" href="../../css/warning.css">
-  <link rel="stylesheet" href="../../css/tui-pagination.css">
+  <!-- <link rel="stylesheet" href="../../css/tui-pagination.css"> -->
   <script src="../../plugins/jquery/dist/jquery.min.js"></script>
   <script src="../../plugins/jquery-ui/jquery-ui.min.js"></script>
   <script src="../../plugins/jquery-ui/ui/i18n/datepicker-ko.js"></script>
@@ -20,7 +20,7 @@
   <script src="../../plugins/jqueryui-timepicker-addon/dist/jquery.datetimepicker.full.min.js"></script>
   <!-- <script src="../../plugins/jqueryui-timepicker-addon/dist/i18n/jquery-ui-timepicker-ko.js"></script> -->
   <script src="../../plugins/echarts/dist/echarts.min.js"></script>
-  <!-- <script src="../../js/tui-pagination.js"></script> -->
+  <script src="../../js/tui-pagination.js"></script>
   <script src="../../js/common.js"></script>
   <script src="../../js/ui_common.js"></script>
 
@@ -30,32 +30,30 @@
 <body>
   <div class="login_wrap">
     <div class="login">
-      <div class="login_tit">
-        <h1 class="tit_login flex_wrap f_sb">
+      <header class="login_tit">
+        <h1 class="tit_login">
           <b>
-          <img src="../../images/4278000000.png" style="position:relative;top:-2px;" alt="로고">
+          <img src="../../images/logo/2600000000.png" style="position:relative;top:-2px;" alt="로고">
           	부산광역시 재난 예경보 통합플랫폼
           </b>
           <span>LOGIN</span>
         </h1>
-      </div>
+      </header>
       <div class="login_body">
-        <div class="login_input flex_wrap f_sb">
-          <div>
-            <span class="axi axi-user">
-              <input type="text" id="id" name="user" placeholder="사용자 아이디" title="사용자 아이디" onkeydown="fn_onKeyDown('id')">
-            </span>
-            <span class="axi axi-lock3">
-              <input type="password" id="pwd" name="password" placeholder="비밀번호" title="비밀번호" onkeydown="fn_onKeyDown('pwd');">
-            </span>
-            <div class="alignL login_check">
-              <input type="checkbox" id="login_remember"><label for="login_remember">ID 기억하기</label>
-            </div>
-          </div>
-          <div>
-            <button type="submit" class="btn_login" onclick="login()">로그인</button>
-          </div>
-        </div>
+				<div class="flex_wrap">
+					<div class="login_input">
+						<label for="id">사용자아이디
+							<input type="text" id="id" name="user" placeholder="사용자 아이디" onkeydown="fn_onKeyDown('id')">
+						</label>
+						<label for="pwd">비밀번호
+							<input type="password" id="pwd" name="password" placeholder="비밀번호"  onkeydown="fn_onKeyDown('pwd');">
+						</label>
+					</div>
+					<button type="submit" class="btn_login" onclick="location.href='../warning/monitoring.html'">로그인</button>
+				</div>
+				<label for="login_remember" class="remember_me">
+					<input type="checkbox" id="login_remember">ID 기억하기
+				</label>
       </div>
     </div>
   </div>
