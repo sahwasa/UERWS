@@ -639,6 +639,7 @@ input:disabled{border-color:transparent;}
 .login{position:absolute;left:calc(50% - 340px);top:calc(50% - 160px);width:680px;text-align:left;border-radius:20px;box-shadow:2px 2px 5px rgba(0,0,0,.6);}
 .login_tit{position:relative;height:120px;background-color:$emColor;border-radius:20px 20px 0 0;padding:0 40px;
   .tit_login{display:flex;align-items:center;font-size:25px;letter-spacing:-1.5px;line-height:1.2;font-weight:600;color:#fff;padding-top:70px;text-shadow:0 0 10px rgba(0,0,0,.9);}
+  img{margin-right:15px;}
   span{margin-left:auto;color:#fff;background-color:#293141;letter-spacing:3px;font-size:18px;padding:4px 7px;}
 }
 .login_body{border:1px solid #fff;border-top:5px solid #c94040;border-radius:0 0 20px 20px;background-color:rgba(255,255,255,1);font-size:14px;padding:45px 40px;
